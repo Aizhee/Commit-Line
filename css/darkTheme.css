@@ -7,9 +7,20 @@
 
 .title{
     color: white;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: 600;
     margin: 1em;
+    margin-bottom: 100px;
+}
+
+#commitLine{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(0, 0, 0);
+}
+
+.attribution{
+    padding-bottom: 5px;
 }
 
 /* The actual timeline (the vertical ruler) */

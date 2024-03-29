@@ -78,11 +78,12 @@ function constructCommitTimeline(commits, repo) {
     attribution.style.color = 'rgba(75, 74, 74, 0.432)';
     attribution.style.textAlign = 'center';
     attribution.style.position = 'relative';
+    attribution.class='attribution';
     attribution.style.bottom = '0';
     attribution.style.width = '100%';
     attribution.innerHTML = 'Generated with: <a href="https://aizhee.github.io/Commit-Line/" style="text-decoration: none;color: #2600ff4e;">Commit-Line</a> | Made with ❤️ by: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Aizhe</a>';
 
-    commitLine.insertAdjacentElement('afterend', attribution);
+    commitLine.appendChild(attribution);
 
     if (Array.isArray(commits)) {
         
