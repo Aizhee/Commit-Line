@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔁Commit-Line</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkTheme.css">
+
+</head>
+
+<body>
+    <div id="heading">
+    <h1 style="background: linear-gradient(180deg, rgba(0,47,255,1) 0%, rgba(129,0,255,1) 52%, rgba(69,255,241,1) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; background-clip: text;font-size: 5em; margin-bottom: -30px;">COMMIT-LINE</h1>
+    <h3 style="color: rgb(61, 60, 60); text-align: center;">GitHub Commits HTML Timeline Generator</h3>
+    
+    <input type="text" id="repository" placeholder="Enter GitHub Repository URL">
+    
+    <span id="button-menu">
+        <button id="updateLink" class="menu-btn">
+            <svg height="15" width="15" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
+                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+            </svg>
+            Generate
+        </button>
+        <button id="shareURL" class="menu-btn">
+            <svg height="15" width="15" fill="#FFFFFF" viewBox="0 0 458.624 458.624" data-name="Layer 2" id="Layer_2" class="share">
+                        <path d="M339.588,314.529c-14.215,0-27.456,4.133-38.621,11.239l-112.682-78.67c1.809-6.315,2.798-12.976,2.798-19.871    c0-6.896-0.989-13.557-2.798-19.871l109.64-76.547c11.764,8.356,26.133,13.286,41.662,13.286c39.79,0,72.047-32.257,72.047-72.047    C411.634,32.258,379.378,0,339.588,0c-39.79,0-72.047,32.257-72.047,72.047c0,5.255,0.578,10.373,1.646,15.308l-112.424,78.491    c-10.974-6.759-23.892-10.666-37.727-10.666c-39.79,0-72.047,32.257-72.047,72.047s32.256,72.047,72.047,72.047    c13.834,0,26.753-3.907,37.727-10.666l113.292,79.097c-1.629,6.017-2.514,12.34-2.514,18.872c0,39.79,32.257,72.047,72.047,72.047    c39.79,0,72.047-32.257,72.047-72.047C411.635,346.787,379.378,314.529,339.588,314.529z"/>
+                </svg>
+            Share URL</button>
+        <button id="shareIFrame" class="menu-btn">
+            <svg fill="#ffffff" height="15" width="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460 460" xml:space="preserve" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+                <path d="M429.636,0H139.664c-15.655,0-28.346,12.691-28.346,28.347v34.529h209.018c43.2,0,78.347,35.146,78.347,78.347v205.901 h30.954c15.655,0,28.346-12.691,28.346-28.347V28.347C457.982,12.691,445.291,0,429.636,0z"></path> <path d="M320.336,112.876H30.364c-15.655,0-28.347,12.691-28.347,28.347v290.431C2.018,447.309,14.709,460,30.364,460h289.971 c15.655,0,28.347-12.691,28.347-28.347v-290.43C348.682,125.567,335.991,112.876,320.336,112.876z"></path> 
+            </svg>
+            Share Iframe</button>
+        <button id="copyCode" class="menu-btn">
+            <svg width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            Copy Code</button>
+        <button id="changeTheme" class="menu-btn">
+            <svg height="15" width="15" fill="#ffffff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M392.26 1042.5c137.747-57.67 292.85-15.269 425.873 116.217l4.394 4.833c116.656 146.425 149.5 279.119 97.873 394.237-128.85 287.138-740.692 328.77-810.005 332.504L0 1896.442l61.953-91.83c.989-1.539 105.013-158.728 105.013-427.192 0-141.811 92.6-279.558 225.294-334.92ZM1728.701 23.052c54.923-1.099 99.96 15.268 135.111 49.43 40.643 40.644 58.109 87.877 56.021 140.603C1908.85 474.52 1423.33 953.447 1053.15 1280.79c-24.276-64.81-63.711-136.21-125.335-213.102l-8.787-9.886c-80.078-80.187-169.163-135.11-262.423-161.473C955.276 558.002 1460.677 33.927 1728.701 23.052Z" fill-rule="evenodd"></path> </g></svg>
+            Change Theme</button>
+    </span>
+    </div>
+
+
+    <div id="commitLine">
+    <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script type="module">
+        import randomUseragent from 'https://cdn.jsdelivr.net/npm/random-useragent@0.5.0/+esm'
+        import './js/index.js'
+    </script>
+
+    <link id="themeStyleSheet" rel="stylesheet" href="https://example.com/theme1.css"></link>
+
+<footer>
+    <p style="color: rgba(75, 74, 74, 0.432); text-align: center; position: relative; bottom: 0; width: 100%;">Generated with: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Commit-Line</a> | Made with ❤️ by: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Aizhe</a></p>
+</footer>
+    
+    
+</body>
+
+</html>
