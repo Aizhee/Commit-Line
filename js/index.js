@@ -16,8 +16,8 @@ function updateRepo() {
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('url', repositoryURL);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-        localStorage.removeItem('commits');
-        fetchCommitsInterval(username, repo);
+        location.reload(true);
+
     } else {
         document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
     }
@@ -35,12 +35,22 @@ function fetchCommits(username, repo) {
     return fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
         headers: headers
     })
-        .then(response => {
+        .then(async response => {
             if (!response.ok) {
                 useragent = getRandomUserAgent();
-
+                console.log(useragent);
                 headers.set('User-Agent', useragent);
-                return fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
+                let response;
+                do {
+                    response = await fetchCommitsAsync(username, repo, headers);
+                    await new Promise(resolve => setTimeout(resolve, 60000));
+                } while (!response.ok);
+
+                return response.json();
+            }
+
+            async function fetchCommitsAsync(username, repo, headers) {
+                return await fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
                     headers: headers
                 });
             }
@@ -65,11 +75,12 @@ function fetchCommitsInterval(username, repo) {
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+                document.querySelector('.error').textContent = 'Error fetching data';
             });
     }
 
     fetchData();
-    setInterval(fetchData, getRandomInt(5000, 10000));
+    setInterval(fetchData, getRandomInt(60000, 12000));
 }
 
 function getRandomInt(min, max) {
@@ -80,7 +91,7 @@ function getRandomInt(min, max) {
 function loadCommitsFromStorage(repo) {
     console.log('reading local storage');
     const storedCommits = localStorage.getItem('commits');
-    if (storedCommits) {
+    if (storedCommits !== undefined) {
         const commits = JSON.parse(storedCommits);
         constructCommitTimeline(commits, repo);
     }
@@ -175,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (repositoryURL) {
         const { username, repo } = extractGitHubInfo(repositoryURL);
         if (username && repo) {
+            const repositoryURLElement = document.getElementById('repository');
+            repositoryURLElement.value = repositoryURL;
             fetchCommitsInterval(username, repo);
         } else {
             document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
