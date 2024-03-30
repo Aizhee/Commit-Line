@@ -16,7 +16,8 @@ function updateRepo() {
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('url', repositoryURL);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-        fetchCommits(username, repo);
+        localStorage.removeItem('commits');
+        fetchCommitsInterval(username, repo);
     } else {
         document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
     }
@@ -30,8 +31,8 @@ function fetchCommits(username, repo) {
     let useragent = defaultUserAgent;
 
     headers.append('User-Agent', useragent);
-
-    fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
+    console.log('fetching commits');
+    return fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
         headers: headers
     })
         .then(response => {
@@ -45,45 +46,94 @@ function fetchCommits(username, repo) {
             }
             return response.json();
         })
-        .then(commits => {
-            constructCommitTimeline(commits, repo);
-        })
         .catch(error => {
             console.error('Error fetching data:', error);
+            loadCommitsFromStorage(repo);
         });
+}
+
+function fetchCommitsInterval(username, repo) {
+
+    function fetchData() {
+        fetchCommits(username, repo) // Pass username and repo
+            .then(commits => {
+                // Store fetched data in local storage
+                localStorage.removeItem('commits');
+                console.log('deleted local storage');
+                localStorage.setItem('commits', JSON.stringify(commits));
+                loadCommitsFromStorage(repo);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    fetchData();
+    setInterval(fetchData, getRandomInt(5000, 10000));
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Function to load commits from local storage
+function loadCommitsFromStorage(repo) {
+    console.log('reading local storage');
+    const storedCommits = localStorage.getItem('commits');
+    if (storedCommits) {
+        const commits = JSON.parse(storedCommits);
+        constructCommitTimeline(commits, repo);
+    }
 }
 
 // Function to construct timeline items for commits
 function constructCommitTimeline(commits, repo) {
-    const title = document.createElement('h1');
-    const error = document.createElement('p');
+    
+    const title = document.querySelector('.title') || document.createElement('h1');
+    const error = document.querySelector('.error') || document.createElement('p');
 
     error.className = 'error';
     title.className = 'title';
 
+    title.textContent = ''; 
     title.textContent = repo; 
 
     error.textContent = '';
 
     const timeline = document.getElementById('timeline');
-    timeline.innerHTML = ''; 
-
     const commitLine = document.getElementById('commitLine');
+    
+    if (!timeline) {
+        const newTimeline = document.createElement('div');
+        newTimeline.id = 'timeline';
+        commitLine.appendChild(newTimeline);
+    } else {
+        timeline.innerHTML = '';
+    }
 
     
     commitLine.insertBefore(error, timeline);
     commitLine.insertBefore(title, error);
 
-    const attribution = document.createElement('p');
-    attribution.style.color = 'rgba(75, 74, 74, 0.432)';
-    attribution.style.textAlign = 'center';
-    attribution.style.position = 'relative';
-    attribution.class='attribution';
-    attribution.style.bottom = '0';
-    attribution.style.width = '100%';
-    attribution.innerHTML = 'Generated with: <a href="https://aizhee.github.io/Commit-Line/" style="text-decoration: none;color: #2600ff4e;">Commit-Line</a> | Made with ❤️ by: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Aizhe</a>';
+    const existingAttribution = document.querySelector('.attribution');
+    if (existingAttribution) {
+        existingAttribution.remove();
+    } 
 
-    commitLine.appendChild(attribution);
+    if (!document.querySelector('.attribution')) {
+        const attribution = document.createElement('p');
+        attribution.className = 'attribution';
+        attribution.innerHTML = '';
+        
+        attribution.style.color = 'rgba(75, 74, 74, 0.432)';
+        attribution.style.textAlign = 'center';
+        attribution.style.position = 'relative';
+        attribution.style.bottom = '0';
+        attribution.style.width = '100%';
+        attribution.innerHTML = 'Generated with: <a href="https://aizhee.github.io/Commit-Line/" style="text-decoration: none;color: #2600ff4e;">Commit-Line</a> | Made with ❤️ by: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Aizhe</a>';
+
+        commitLine.appendChild(attribution);
+    }
 
     if (Array.isArray(commits)) {
         
@@ -125,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (repositoryURL) {
         const { username, repo } = extractGitHubInfo(repositoryURL);
         if (username && repo) {
-            fetchCommits(username, repo);
+            fetchCommitsInterval(username, repo);
         } else {
             document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
         }
@@ -153,6 +203,9 @@ function changeTheme() {
         { name: ' Theme: theme3 ', url: 'https://example.com/theme3.css' }
     ];
 
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.has('url')){
     document.getElementById('changeTheme').textContent = 'Changing theme...';
 
     const styleSheet = document.getElementById('themeStyleSheet');
@@ -165,7 +218,6 @@ function changeTheme() {
         const nextIndex = (currentIndex + 1) % themes.length;
         styleSheet.href = themes[nextIndex].url;
 
-        const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('theme', themes[nextIndex].name);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
 
@@ -177,4 +229,11 @@ function changeTheme() {
         urlParams.set('theme', themes[0].name);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
     }
+    } else {
+        document.querySelector('.error').textContent = 'Enter a GitHub Repository URL to change theme';
+    }
+
 }
+
+
+
