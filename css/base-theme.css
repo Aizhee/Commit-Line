@@ -1,0 +1,263 @@
+/* Global styles */
+:root {
+    
+    /* Don't Change These */
+    --hover-box-shadow: var(--content-horizontal-shadow) var(--content-vertical-shadow) var(--content-blur-radius) 0px var(--hover-box-shadow-color);
+    --hover-box-shadow-color: rgba(var(--hover-box-shadow-color-main), var(--hover-box-shadow-color-main-alpha));
+    --background-color: rgba(var(--background-color-property),var(--background-transparency));
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#commitLine{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: var(--background-color);
+
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+    position: relative;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+.title{
+    color: rgb(var(--text-color-title));
+    font-family: var(--font-family-global);
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    margin: 1em;
+    margin-bottom: 100px;
+}
+
+.messageText {
+    margin-top: -1px;
+    color: rgb(var(--text-color-primary));
+    font-size: var(--font-size-commit-message);
+    font-family: var(--font-family-global);
+    font-weight: var(--font-weight-commit-message);
+}
+
+.timestampText {
+    margin-top: var(--margin-top-time);
+    color: rgb(var(--text-color-secondary));
+    font-size: var(--font-size-commit-time);
+    font-family: var(--font-family-global);
+    font-weight: var(--font-weight-commit-time);
+}
+
+.attribution{
+    padding-bottom: 5px;
+    font-family:  "Outfit", sans-serif;
+    /* make this hidden as needed */
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: var(--vertical-ruler-thickness);
+    background: linear-gradient(-90deg, rgba(var(--vertical-ruler-color-start), var(--vertical-ruler-color-start-alpha)) 0%, rgba(var(--vertical-ruler-color-end), var(--vertical-ruler-color-end-alpha)) 100%);
+    background: -moz-linear-gradient(-90deg, rgba(var(--vertical-ruler-color-start), var(--vertical-ruler-color-start-alpha)) 0%, rgba(var(--vertical-ruler-color-end), var(--vertical-ruler-color-end-alpha)) 100%);
+    background: -webkit-linear-gradient(-90deg, rgba(var(--vertical-ruler-color-start), var(--vertical-ruler-color-start-alpha)) 0%, rgba(var(--vertical-ruler-color-end), var(--vertical-ruler-color-end-alpha)) 100%);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+}
+
+/* Container around content */
+.container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+
+/* The circles on the timeline */
+.container::after {
+    content: '';
+    position: absolute;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    right: calc(var(--vertical-ruler-thickness)/2 - var(--dot-size) + 1px);
+    background-color: rgb(var(--secondary-color));
+    border: 5px solid rgb(var(--primary-color));
+
+    box-shadow: var(--horizontal-shadow) var(--vertical-shadow) var(--blur-radius) 0px rgba(var(--dot-box-shadow-color),var(--dot-box-shadow-color-alpha));
+    -webkit-box-shadow: var(--horizontal-shadow) var(--vertical-shadow) var(--blur-radius) 0px rgba(var(--dot-box-shadow-color),var(--dot-box-shadow-color-alpha));
+    -moz-box-shadow: var(--horizontal-shadow) var(--vertical-shadow) var(--blur-radius) 0px rgba(var(--dot-box-shadow-color),var(--dot-box-shadow-color-alpha));
+    
+    top: var(--ponter-poition);
+    border-radius: var(--dot-border-radius);
+    z-index: 1;
+}
+/* Fix the circle for containers on the right side */
+.right::after {
+    left: calc(var(--vertical-ruler-thickness)/2 - var(--dot-size) + 6px);
+}
+/* Place the container to the left */
+.left {
+    left: 0;
+    text-align: right;
+}
+
+/* Place the container to the right */
+.right {
+    left: 50%;
+}
+
+.left.line::before,.right.line::before {
+    content: " ";
+    position: absolute;
+    z-index: 1;
+}
+
+.left.arrow::before,.right.arrow::before {
+    content: " ";
+    position: absolute;
+    z-index: 1;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left.line::before {
+    height: var(--branch-thickness);
+    top: calc(var(--ponter-poition) + 15px);
+    width: var(--branch-width);
+    right: 0;
+    background-color: rgb(var(--branch-color));
+}
+
+.left.arrow::before {
+    height: 0;
+    top: calc(var(--ponter-poition) + 10px );
+    width: 0;
+    right: 30px;
+    border: medium solid rgb(var(--primary-color));
+    border-width: var(--ponter-size-arrow) 0 var(--ponter-size-arrow) var(--ponter-size-arrow);
+    border-color: transparent transparent transparent rgb(var(--primary-color));
+} 
+
+.right.line::before {
+    height:  var(--branch-thickness);
+    top: calc(var(--ponter-poition) + 15px );
+    left: 0;
+    width: var(--branch-width);
+    background-color: rgb(var(--branch-color));
+}
+
+.right.arrow::before {
+    height: 0;
+    top: calc(var(--ponter-poition) + 10px );
+    width: 0;
+    left: 30px;
+    border: medium solid rgb(var(--primary-color));
+    border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+    border-color: transparent rgb(var(--primary-color)) transparent transparent;
+} 
+
+/* The actual content */
+.content {
+    padding: var(--content-padding);
+    background-color: rgba(var(--content-background-color),var(--content-background-color-alpha));
+    position: relative;
+    border-radius: var(--content-border-radius);
+    outline: rgb(var(--content-border-color)) var(--content-border-width) var(--content-border-style);
+    transition: all var(--transition-property-seconds) var(--transition-property-bezier-curve);
+}
+
+.content:hover {
+    background-color: rgba(var(--hover-content-background-color),var(--hover-content-background-color-alpha));
+    box-shadow: var(--hover-box-shadow);
+    -webkit-box-shadow: var(--hover-box-shadow);
+    -moz-box-shadow: var(--hover-box-shadow);
+    outline: rgb(var(--hover-content-border-color)) var(--hover-content-border-width) var(--hover-content-border-style);
+    border-radius: var(--content-border-radius);
+    padding: var(--hover-content-padding);
+}
+
+.content:hover > p {
+    position: relative;
+
+    background: var(--content-text-gradient-background);
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: var(--content-text-fill-color);
+
+    transition: all var(--transition-property-seconds) var(--transition-property-bezier-curve);
+}
+
+@media screen and (max-width: 600px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    
+    .container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .container::after{
+        top: calc(var(--ponter-poition) + var(--dot-size)/2 - 10px);
+    }
+    
+    
+    .left.arrow::before , .right.arrow::before {
+        top: calc(var(--ponter-poition) + 10px );
+    } 
+    
+
+    .left.arrow::before {
+        left: 61px;
+        border: medium solid rgb(var(--primary-color));
+        border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+        border-color: transparent rgb(var(--primary-color)) transparent transparent;
+    } 
+
+    .left.line::before {
+        left: 30px;
+        top: 32px;
+        width: var(--branch-width);
+        right: 0;
+        z-index: 1;
+        background-color: rgb(var(--primary-color));
+    }
+    
+    .right.arrow::before {
+        left: 61px;
+        border: medium solid rgb(var(--primary-color));
+        border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+        border-color: transparent rgb(var(--primary-color)) transparent transparent;
+    } 
+
+    .right.line::before {
+        left: 30px;
+        top: 32px;
+        width: var(--branch-width);
+        right: 0;
+        z-index: 1;
+        background-color: rgb(var(--primary-color));
+    }
+    
+    .left::after,
+    .right::after {
+        left: 15px;
+    }
+
+    
+    .right {
+        left: 0%;
+    }
+
+    .left{
+        text-align: left;
+    }
+
+}

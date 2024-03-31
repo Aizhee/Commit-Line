@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/darkTheme.css">
+    <link rel="stylesheet" href="css/base-theme.css">
+    <link rel="stylesheet" href="css/variables.css">
 
 </head>
 
@@ -18,8 +19,11 @@
     <h1 style="background: linear-gradient(180deg, rgba(0,47,255,1) 0%, rgba(129,0,255,1) 52%, rgba(69,255,241,1) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; background-clip: text;font-size: 5em; margin-bottom: -30px;">COMMIT-LINE</h1>
     <h3 style="color: rgb(61, 60, 60); text-align: center;">GitHub Commits HTML Timeline Generator</h3>
     
-    <input type="text" id="repository" placeholder="Enter GitHub Repository URL">
+    <input type="text" id="repository" class="inputField" placeholder="Enter GitHub Repository URL">
+
+    <input type="text" id="theme" class="inputField" placeholder="Enter Theme Code (Optional)">
     
+
     <span id="button-menu">
         <button id="updateLink" class="menu-btn">
             <svg height="15" width="15" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
@@ -41,8 +45,10 @@
             <svg width="20" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             Copy Code</button>
         <button id="changeTheme" class="menu-btn">
+        
             <svg height="15" width="15" fill="#ffffff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M392.26 1042.5c137.747-57.67 292.85-15.269 425.873 116.217l4.394 4.833c116.656 146.425 149.5 279.119 97.873 394.237-128.85 287.138-740.692 328.77-810.005 332.504L0 1896.442l61.953-91.83c.989-1.539 105.013-158.728 105.013-427.192 0-141.811 92.6-279.558 225.294-334.92ZM1728.701 23.052c54.923-1.099 99.96 15.268 135.111 49.43 40.643 40.644 58.109 87.877 56.021 140.603C1908.85 474.52 1423.33 953.447 1053.15 1280.79c-24.276-64.81-63.711-136.21-125.335-213.102l-8.787-9.886c-80.078-80.187-169.163-135.11-262.423-161.473C955.276 558.002 1460.677 33.927 1728.701 23.052Z" fill-rule="evenodd"></path> </g></svg>
-            Change Theme</button>
+            Theme Builder</button>
+
     </span>
     </div>
 
@@ -55,9 +61,7 @@
         import randomUseragent from 'https://cdn.jsdelivr.net/npm/random-useragent@0.5.0/+esm'
         import './js/index.js'
     </script>
-
-    <link id="themeStyleSheet" rel="stylesheet" href="https://example.com/theme1.css"></link>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
     
 </body>
 

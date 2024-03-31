@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎨CL Theme Edior</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/base-theme.css" />
+    <link rel="stylesheet" href="css/designer.css" />
+  </head>
+
+  <body>
+    <div id="heading">
+      <h1
+        style="
+          background: linear-gradient(
+            180deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 94, 0, 1) 50%,
+            rgba(195, 69, 252, 1) 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-align: center;
+          background-clip: text;
+          font-size: 5em;
+          margin-bottom: -30px;
+        "
+      >
+        COMMIT-LINE
+      </h1>
+      <h2 style="color: rgb(61, 60, 60); text-align: center">Theme Editor</h2>
+
+      <input
+        type="text"
+        class="inputField"
+        id="theme"
+        placeholder="Code Generates Here"
+        readonly
+      />
+
+      <span id="button-menu">
+        <button id="copyCode" class="menu-btn" >
+          <svg
+            width="20"
+            height="15"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M7 8L3 11.6923L7 16M17 8L21 11.6923L17 16M14 4L10 20"
+                stroke="#ffffff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+          Copy Theme Code
+        </button>
+      </span>
+    </div>
+
+    <div id="mainEdit">
+
+    <div id="commitLinee">
+      <iframe
+        id="commitLineIframe"
+        src="preview.html"
+        title="Commit Line" 
+        scrolling="no"
+        ></iframe>    
+    </div>
+
+    <div id="settings">
+        
+        <h3>Main Colors</h3><label for="primary-color">primary-color:</label><input type="text" id="primary-color"
+            class="css-variable" value="128, 0, 255"><br><label for="secondary-color">secondary-color:</label><input type="text"
+            id="secondary-color" class="css-variable" value="255, 255, 255"><br><label
+            for="background-color-property">background-color-property:</label><input type="text" id="background-color-property"
+            class="css-variable" value="0, 0, 0"><br><label for="background-transparency">background-transparency:</label><input
+            type="text" id="background-transparency" class="css-variable" value="0.973"><br>
+        <h3>Text Colors</h3><label for="text-color-title">text-color-title:</label><input type="text" id="text-color-title"
+            class="css-variable" value="255, 255, 255"><br><label for="text-color-primary">text-color-primary:</label><input
+            type="text" id="text-color-primary" class="css-variable" value="255, 255, 255"><br><label
+            for="text-color-secondary">text-color-secondary:</label><input type="text" id="text-color-secondary"
+            class="css-variable" value="74, 74, 74"><br>
+        <h3>Content Properties</h3><label for="content-background-color">content-background-color:</label><input type="text"
+            id="content-background-color" class="css-variable" value="0, 0, 0"><br><label
+            for="content-background-color-alpha">content-background-color-alpha:</label><input type="text"
+            id="content-background-color-alpha" class="css-variable" value="1"><br><label
+            for="content-border-color">content-border-color:</label><input type="text" id="content-border-color"
+            class="css-variable" value="255, 255, 255"><br><label
+            for="content-border-radius">content-border-radius:</label><input type="text" id="content-border-radius"
+            class="css-variable" value="5px"><br><label for="content-border-width">content-border-width:</label><input
+            type="text" id="content-border-width" class="css-variable" value="2px"><br><label
+            for="content-border-style">content-border-style:</label><input type="text" id="content-border-style"
+            class="css-variable" value="none"><br><label for="content-max-width">content-max-width:</label><input type="text"
+            id="content-max-width" class="css-variable" value="700px"><br><label
+            for="content-padding">content-padding:</label><input type="text" id="content-padding" class="css-variable"
+            value="15px"><br>
+        <h3>Font Properties (Google Fonts Supported)</h3><label for="font-family-global">font-family-global:</label><input
+            type="text" id="font-family-global" class="css-variable" value="&quot;Outfit&quot;, sans-serif"><br>
+        <h3>Time Margin</h3><label for="margin-top-time">margin-top-time:</label><input type="text" id="margin-top-time"
+            class="css-variable" value="-20px"><br>
+        <h3>Font Sizes</h3><label for="font-size-title">font-size-title:</label><input type="text" id="font-size-title"
+            class="css-variable" value="3em"><br><label for="font-size-commit-message">font-size-commit-message:</label><input
+            type="text" id="font-size-commit-message" class="css-variable" value="1.5em"><br><label
+            for="font-size-commit-time">font-size-commit-time:</label><input type="text" id="font-size-commit-time"
+            class="css-variable" value="1em"><br>
+        <h3>Font Weights</h3><label for="font-weight-title">font-weight-title:</label><input type="text" id="font-weight-title"
+            class="css-variable" value="600"><br><label
+            for="font-weight-commit-message">font-weight-commit-message:</label><input type="text"
+            id="font-weight-commit-message" class="css-variable" value="600"><br><label
+            for="font-weight-commit-time">font-weight-commit-time:</label><input type="text" id="font-weight-commit-time"
+            class="css-variable" value="400"><br>
+        <h3>Pointer Properties (line or arrow)</h3><label for="pointer-type">pointer-type:</label><input type="text" id="pointer-type"
+            class="css-variable" value="line"><br>
+        <h3>Branch(Line) Properties</h3><label for="branch-color">branch-color:</label><input type="text" id="branch-color"
+            class="css-variable" value="128, 0, 255"><br><label for="branch-thickness">branch-thickness:</label><input
+            type="text" id="branch-thickness" class="css-variable" value="3px"><br><label
+            for="branch-width">branch-width:</label><input type="text" id="branch-width" class="css-variable" value="30px"><br>
+        <h3>Arrow (set pointer-type to arrow to activate)</h3><label for="ponter-size-arrow">ponter-size-arrow:</label><input type="text"
+            id="ponter-size-arrow" class="css-variable" value="10px"><br>
+        <h3>Ruler Properties</h3><label for="vertical-ruler-thickness">vertical-ruler-thickness:</label><input type="text"
+            id="vertical-ruler-thickness" class="css-variable" value="5px"><br><label
+            for="vertical-ruler-color-start">vertical-ruler-color-start:</label><input type="text"
+            id="vertical-ruler-color-start" class="css-variable" value="255, 255, 255"><br><label
+            for="vertical-ruler-color-start-alpha">vertical-ruler-color-start-alpha:</label><input type="text"
+            id="vertical-ruler-color-start-alpha" class="css-variable" value="1"><br><label
+            for="vertical-ruler-color-end">vertical-ruler-color-end:</label><input type="text" id="vertical-ruler-color-end"
+            class="css-variable" value="255, 255, 255"><br><label
+            for="vertical-ruler-color-end-alpha">vertical-ruler-color-end-alpha:</label><input type="text"
+            id="vertical-ruler-color-end-alpha" class="css-variable" value="0"><br>
+        <h3>Dot Properties</h3><label for="dot-size">dot-size:</label><input type="text" id="dot-size" class="css-variable"
+            value="20px"><br><label for="dot-border-radius">dot-border-radius:</label><input type="text" id="dot-border-radius"
+            class="css-variable" value="50%"><br>
+        <h3>Pointer Properties</h3><label for="ponter-poition">ponter-poition:</label><input type="text" id="ponter-poition"
+            class="css-variable" value="20px"><br>
+        <h3>Dot Glow</h3><label for="dot-box-shadow-color">dot-box-shadow-color:</label><input type="text"
+            id="dot-box-shadow-color" class="css-variable" value="144, 0, 255"><br><label
+            for="dot-box-shadow-color-alpha">dot-box-shadow-color-alpha:</label><input type="text"
+            id="dot-box-shadow-color-alpha" class="css-variable" value="1"><br><label
+            for="horizontal-shadow">horizontal-shadow:</label><input type="text" id="horizontal-shadow" class="css-variable"
+            value="0px"><br><label for="vertical-shadow">vertical-shadow:</label><input type="text" id="vertical-shadow"
+            class="css-variable" value="-1px"><br><label for="blur-radius">blur-radius:</label><input type="text"
+            id="blur-radius" class="css-variable" value="25px"><br>
+        <h3>Hover Properties</h3>
+        <h3>Global Transition Property</h3><label for="transition-property-seconds">transition-property-seconds:</label><input
+            type="text" id="transition-property-seconds" class="css-variable" value="0.3s"><br><label
+            for="transition-property-bezier-curve">transition-property-bezier-curve:</label><input type="text"
+            id="transition-property-bezier-curve" class="css-variable" value="ease-in-out"><br><label
+            for="hover-content-background-color">hover-content-background-color:</label><input type="text"
+            id="hover-content-background-color" class="css-variable" value="0, 0, 0"><br><label
+            for="hover-content-background-color-alpha">hover-content-background-color-alpha:</label><input type="text"
+            id="hover-content-background-color-alpha" class="css-variable" value="1"><br><label
+            for="hover-content-border-color">hover-content-border-color:</label><input type="text"
+            id="hover-content-border-color" class="css-variable" value="128, 0, 255"><br>
+        <h3>Gradient Background</h3><label
+            for="content-text-gradient-background">content-text-gradient-background:</label><input type="text"
+            id="content-text-gradient-background" class="css-variable"
+            value="linear-gradient(180deg, rgb(49, 86, 252) 0%, rgb(154, 53, 255) 52%, rgb(68, 249, 234) 100%)"><br><label
+            for="content-text-fill-color">content-text-fill-color:</label><input type="text" id="content-text-fill-color"
+            class="css-variable" value="transparent"><br>
+        <h3>Hover Content Properties</h3><label for="hover-content-border-style">hover-content-border-style:</label><input
+            type="text" id="hover-content-border-style" class="css-variable" value="dashed"><br><label
+            for="hover-content-border-radius">hover-content-border-radius:</label><input type="text"
+            id="hover-content-border-radius" class="css-variable" value="10px"><br><label
+            for="hover-content-border-width">hover-content-border-width:</label><input type="text"
+            id="hover-content-border-width" class="css-variable" value="2px"><br><label
+            for="hover-content-padding">hover-content-padding:</label><input type="text" id="hover-content-padding"
+            class="css-variable" value="20px"><br>
+        <h3>Hover Content Glow</h3><label for="hover-box-shadow-color-main">hover-box-shadow-color-main:</label><input
+            type="text" id="hover-box-shadow-color-main" class="css-variable" value="144, 0, 255"><br><label
+            for="hover-box-shadow-color-main-alpha">hover-box-shadow-color-main-alpha:</label><input type="text"
+            id="hover-box-shadow-color-main-alpha" class="css-variable" value="0.45"><br><label
+            for="content-horizontal-shadow">content-horizontal-shadow:</label><input type="text" id="content-horizontal-shadow"
+            class="css-variable" value="0px"><br><label for="content-vertical-shadow">content-vertical-shadow:</label><input
+            type="text" id="content-vertical-shadow" class="css-variable" value="-1px"><br><label
+            for="content-blur-radius">content-blur-radius:</label><input type="text" id="content-blur-radius"
+            class="css-variable" value="25px"><br>
+        
+    </div>
+
+    </div>
+
+    <script>
+        function applyCSSVariables() {
+            var iframe = document.getElementById('commitLineIframe');
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            iframe.contentWindow.toggleArrowClass();
+
+            var style = iframeDoc.getElementById('variableCss') || iframeDoc.createElement('style');
+            style.id = 'variableCss'; 
+            var cssText = `:root {`;
+            var inputs = document.querySelectorAll('.css-variable');
+            inputs.forEach(function (input) {
+                var value = input.value;
+                var variableName = input.id.replace(/-/g, '-'); 
+                variableName = `-${variableName}`; 
+                cssText += `\n\t-${variableName}: ${value};`;
+            });
+            cssText += `\n}`;
+            style.textContent = cssText;
+            if (!style.parentNode) {
+                iframeDoc.head.appendChild(style);
+            } else {
+                
+                style.textContent = cssText;
+            }
+            combineInputs()
+        }
+
+        function combineInputs() {
+            var inputs = document.querySelectorAll('.css-variable');
+            var combinedString = '';
+            inputs.forEach(function(input) {
+                combinedString += input.value + '$';
+            });
+            combinedString = combinedString.slice(0, -1);
+            var compressed = pako.gzip(combinedString, { level: 9 });
+            var encoded = btoa(String.fromCharCode.apply(null, compressed));
+            document.getElementById('theme').value = encoded;
+        }
+
+
+        window.onload = applyCSSVariables;
+        document.getElementById('copyCode').addEventListener('click', applyCSSVariables);
+        var inputs = document.querySelectorAll('.css-variable');
+        inputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                applyCSSVariables();
+                combineInputs();
+            });
+        });
+        
+        document.getElementById('copyCode').addEventListener('click', function() {
+        var themeValue = document.getElementById('theme').value;
+        navigator.clipboard.writeText(themeValue)
+            .then(function() {
+                alert('Copying to clipboard was successful!');
+            })
+            .catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+            
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
+    <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
+    
+    <script>
+        Split(['#commitLinee', '#settings'], {
+        gutterSize: 5,
+        sizes: [50,50],
+        minSize:[400, 400]
+      });
+    </script>
+
+    
+
+  </body>
+</html>

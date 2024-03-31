@@ -10,11 +10,13 @@ function extractGitHubInfo(url) {
 
 // Function to update repository based on input URL
 function updateRepo() {
+    const theme = document.getElementById('theme').value;
     const repositoryURL = document.getElementById('repository').value;
     const { username, repo } = extractGitHubInfo(repositoryURL);
     if (username && repo) {
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('url', repositoryURL);
+        urlParams.set('theme', theme);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
         location.reload(true);
 
@@ -40,11 +42,23 @@ function fetchCommits(username, repo) {
                 useragent = getRandomUserAgent();
                 console.log(useragent);
                 headers.set('User-Agent', useragent);
+
                 let response;
+                let iterationCount = 0;
+
                 do {
                     response = await fetchCommitsAsync(username, repo, headers);
                     await new Promise(resolve => setTimeout(resolve, 60000));
-                } while (!response.ok);
+                    iterationCount++;
+                } while (!response.ok && iterationCount < 5);
+
+                if (iterationCount === 5) {
+                    const storedCommits = localStorage.getItem('commits');
+                    if (storedCommits !== undefined) {
+                        const commits = JSON.parse(storedCommits);
+                        return commits;
+                    }
+                }
 
                 return response.json();
             }
@@ -64,21 +78,21 @@ function fetchCommits(username, repo) {
 
 function fetchCommitsInterval(username, repo) {
 
-    function fetchData() {
-        fetchCommits(username, repo) // Pass username and repo
-            .then(commits => {
-                // Store fetched data in local storage
-                localStorage.removeItem('commits');
-                console.log('deleted local storage');
-                localStorage.setItem('commits', JSON.stringify(commits));
-                loadCommitsFromStorage(repo);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                document.querySelector('.error').textContent = 'Error fetching data';
-            });
-    }
 
+    function fetchData() {
+         fetchCommits(username, repo) // Pass username and repo
+             .then(commits => {
+                 // Store fetched data in local storage
+                 localStorage.removeItem('commits');
+                 console.log('deleted local storage');
+                 localStorage.setItem('commits', JSON.stringify(commits));
+                 loadCommitsFromStorage(repo);
+             })
+             .catch(error => {
+                 console.error('Error fetching data:', error);
+                 document.querySelector('.error').textContent = 'Error fetching data';
+             });
+            }
     fetchData();
     setInterval(fetchData, getRandomInt(60000, 12000));
 }
@@ -149,15 +163,23 @@ function constructCommitTimeline(commits, repo) {
     if (Array.isArray(commits)) {
         
         commits.forEach((commit, index) => {
+            var pointerType = getComputedStyle(document.documentElement).getPropertyValue('--pointer-type').trim();
             const container = document.createElement('div');
-            container.className = index % 2 === 0 ? 'container left' : 'container right';
+            container.className = index % 2 === 0 ? 'container left ' + pointerType : 'container right ' + pointerType;
 
             const content = document.createElement('div');
             content.className = 'content';
 
             // Extracting commit message and timestamp
             const message = commit.commit.message;
-            const timestamp = new Date(commit.commit.author.date).toLocaleString(); // Format timestamp
+            const timestamp = new Date(commit.commit.author.date).toLocaleString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+                hour12: true 
+            }); // Format timestamp
 
             // Constructing content with message and timestamp
             const messageParagraph = document.createElement('p');
@@ -183,12 +205,26 @@ function constructCommitTimeline(commits, repo) {
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const repositoryURL = urlParams.get('url');
+    const theme = urlParams.get('theme');
+    const hvisible = urlParams.get('hvisible');
+
     if (repositoryURL) {
         const { username, repo } = extractGitHubInfo(repositoryURL);
         if (username && repo) {
             const repositoryURLElement = document.getElementById('repository');
             repositoryURLElement.value = repositoryURL;
+            const themeElement = document.getElementById('theme');
+            themeElement.value = theme;
             fetchCommitsInterval(username, repo);
+
+            if (theme !== null) {
+                decompress(theme);
+            }
+
+            if (hvisible === '0') {
+                doc
+                ument.getElementById('heading').style.display = 'none';
+            }
         } else {
             document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
         }
@@ -203,49 +239,133 @@ function getRandomUserAgent() {
 
 
 document.getElementById('updateLink').addEventListener('click', updateRepo);
-document.getElementById('shareURL').addEventListener('click', updateRepo);
-document.getElementById('shareIFrame').addEventListener('click', updateRepo);
+document.getElementById('shareURL').addEventListener('click', shareURL);
+document.getElementById('shareIFrame').addEventListener('click', shareIFrame);
 document.getElementById('copyCode').addEventListener('click', updateRepo);
 document.getElementById('changeTheme').addEventListener('click', changeTheme);
 
-// Function to change theme by updating CSS URLs
+function shareIFrame() {
+    hideHeading()
+    const urls = window.location.href;
+    navigator.clipboard.writeText(`<iframe src="${urls}" width="100%" height="100%" style="border: none;"></iframe>`)
+    .then(() => {
+        alert("Successfully copied IFrame");
+        showHeading()
+      })
+      .catch((e) => {
+        alert("Something went wrong",e);
+        showHeading()
+      });
+    
+}
+
+function shareURL() {
+    hideHeading()
+    const urls = window.location.href;
+    navigator.clipboard.writeText(urls)
+    .then(() => {
+        alert("Successfully copied URL");
+        showHeading()
+      })
+      .catch((e) => {
+        alert("Something went wrong",e);
+        showHeading()
+      });
+}
+
+function hideHeading() {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('hvisible', 0);
+    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+}
+
+function showHeading() {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('hvisible', 1);
+    window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+}
+
 function changeTheme() {
-    const themes = [
-        { name: ' Theme: theme1 ', url: 'https://example.com/theme1.css' },
-        { name: ' Theme: theme2 ', url: 'css/lightTheme.css' },
-        { name: ' Theme: theme3 ', url: 'https://example.com/theme3.css' }
+    window.open('designer.html', '_self');
+}
+
+function decompress(input) {
+    var decoded = atob(input);
+    var compressed = new Uint8Array(decoded.length);
+    for (var i = 0; i < decoded.length; i++) {
+      compressed[i] = decoded.charCodeAt(i);
+    }
+    var decompressed = pako.inflate(compressed, { to: 'string' });
+    var themeProperties = decompressed.split('$');
+    updateCSSVariables(themeProperties);
+
+  }
+
+  function updateCSSVariables(valuesArray) {
+    var root = document.documentElement;
+    var variableNames = [
+      "--primary-color",
+      "--secondary-color",
+      "--background-color-property",
+      "--background-transparency",
+      "--text-color-title",
+      "--text-color-primary",
+      "--text-color-secondary",
+      "--content-background-color",
+      "--content-background-color-alpha",
+      "--content-border-color",
+      "--content-border-radius",
+      "--content-border-width",
+      "--content-border-style",
+      "--content-max-width",
+      "--content-padding",
+      "--font-family-global",
+      "--margin-top-time",
+      "--font-size-title",
+      "--font-size-commit-message",
+      "--font-size-commit-time",
+      "--font-weight-title",
+      "--font-weight-commit-message",
+      "--font-weight-commit-time",
+      "--pointer-type",
+      "--branch-color",
+      "--branch-thickness",
+      "--branch-width",
+      "--ponter-size-arrow",
+      "--vertical-ruler-thickness",
+      "--vertical-ruler-color-start",
+      "--vertical-ruler-color-start-alpha",
+      "--vertical-ruler-color-end",
+      "--vertical-ruler-color-end-alpha",
+      "--dot-size",
+      "--dot-border-radius",
+      "--ponter-poition",
+      "--dot-box-shadow-color",
+      "--dot-box-shadow-color-alpha",
+      "--horizontal-shadow",
+      "--vertical-shadow",
+      "--blur-radius",
+      "--transition-property-seconds",
+      "--transition-property-bezier-curve",
+      "--hover-content-background-color",
+      "--hover-content-background-color-alpha",
+      "--hover-content-border-color",
+      "--content-text-gradient-background",
+      "--content-text-fill-color",
+      "--hover-content-border-style",
+      "--hover-content-border-radius",
+      "--hover-content-border-width",
+      "--hover-content-padding",
+      "--hover-box-shadow-color-main",
+      "--hover-box-shadow-color-main-alpha",
+      "--content-horizontal-shadow",
+      "--content-vertical-shadow",
+      "--content-blur-radius",
     ];
 
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if(urlParams.has('url')){
-    document.getElementById('changeTheme').textContent = 'Changing theme...';
-
-    const styleSheet = document.getElementById('themeStyleSheet');
-    const currentURL = styleSheet.href;
-    const currentIndex = themes.findIndex(theme => theme.url === currentURL);
-    console.log(currentURL);
-    console.log(currentIndex);
-
-    if (currentIndex !== -1) {
-        const nextIndex = (currentIndex + 1) % themes.length;
-        styleSheet.href = themes[nextIndex].url;
-
-        urlParams.set('theme', themes[nextIndex].name);
-        window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-
-        document.getElementById('changeTheme').innerHTML = '<svg height="15" width="15" fill="#ffffff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M392.26 1042.5c137.747-57.67 292.85-15.269 425.873 116.217l4.394 4.833c116.656 146.425 149.5 279.119 97.873 394.237-128.85 287.138-740.692 328.77-810.005 332.504L0 1896.442l61.953-91.83c.989-1.539 105.013-158.728 105.013-427.192 0-141.811 92.6-279.558 225.294-334.92ZM1728.701 23.052c54.923-1.099 99.96 15.268 135.111 49.43 40.643 40.644 58.109 87.877 56.021 140.603C1908.85 474.52 1423.33 953.447 1053.15 1280.79c-24.276-64.81-63.711-136.21-125.335-213.102l-8.787-9.886c-80.078-80.187-169.163-135.11-262.423-161.473C955.276 558.002 1460.677 33.927 1728.701 23.052Z" fill-rule="evenodd"></path> </g></svg>' + themes[nextIndex].name;
-    
-    } else if (currentIndex === -1) {
-        styleSheet.href = themes[0].url;
-        const urlParams = new URLSearchParams(window.location.search);
-        urlParams.set('theme', themes[0].name);
-        window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-    }
-    } else {
-        document.querySelector('.error').textContent = 'Enter a GitHub Repository URL to change theme';
-    }
-
+    variableNames.forEach(function(variableName, index) {
+        root.style.setProperty(variableName, valuesArray[index]);
+    });
 }
 
 

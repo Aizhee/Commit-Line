@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎨CL Theme Edior</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/base-theme.css" />
+    <link rel="stylesheet" href="css/designer.css" />
+    <style id="variableCss">
+      :root{
+        /* Main Colors */
+        --primary-color: 128, 0, 255;
+        --secondary-color: 255, 255, 255;
+        --background-color-property: 0, 0, 0;
+        --background-transparency: 0.973;
+
+        /* Text Colors */
+        --text-color-title: 255, 255, 255;
+        --text-color-primary: 255, 255, 255;
+        --text-color-secondary: 74, 74, 74;
+
+        /* Content Properties */
+        --content-background-color: 0, 0, 0;
+        --content-background-color-alpha: 1;
+        --content-border-color: 255, 255, 255;
+        --content-border-radius: 5px;
+        --content-border-width: 2px;
+        --content-border-style: none;
+        --content-max-width: 700px;
+        --content-padding: 15px;
+
+        /* Font Properties (Google Fonts Supported)*/
+        --font-family-global: "Outfit", sans-serif;
+
+        /* Time Margin */
+        --margin-top-time: -20px;
+        
+        /* Font Sizes */
+        --font-size-title: 3em;
+        --font-size-commit-message: 1.5em;
+        --font-size-commit-time: 1em;
+
+        /* Font Weights */
+        --font-weight-title: 600;
+        --font-weight-commit-message: 600;
+        --font-weight-commit-time: 400;
+        
+        /* Pointer Properties */
+        --pointer-type: line;
+
+        /* Branch(Line) Properties */
+        --branch-color: 128, 0, 255;
+        --branch-thickness: 3px;
+        --branch-width: 30px;
+
+        /* Arrow Mode Toggle .Arrow to activate */
+        --ponter-size-arrow: 10px;
+
+
+        /* Ruler Properties */
+        --vertical-ruler-thickness: 5px;
+        --vertical-ruler-color-start: 255, 255, 255;
+        --vertical-ruler-color-start-alpha: 1;
+        --vertical-ruler-color-end: 255, 255, 255;
+        --vertical-ruler-color-end-alpha: 0;
+
+        /* Dot Properties */
+        --dot-size:20px;
+        --dot-border-radius: 50%;
+
+        /* Pointer Properties */
+        --ponter-poition:20px;
+        
+        /* Dot Glow */
+        --dot-box-shadow-color: 144, 0, 255;
+        --dot-box-shadow-color-alpha: 1;
+        --horizontal-shadow: 0px;
+        --vertical-shadow: -1px;
+        --blur-radius: 25px;
+
+        /* Hover Properties */
+        /* Global Transition Property */
+        --transition-property-seconds:0.3s;
+        --transition-property-bezier-curve:ease-in-out;
+
+        --hover-content-background-color: 0, 0, 0;
+        --hover-content-background-color-alpha: 1;
+        --hover-content-border-color: 128, 0, 255;
+
+        /* Gradient Background */
+        --content-text-gradient-background:linear-gradient(180deg, rgb(49, 86, 252) 0%, rgb(154, 53, 255) 52%, rgb(68, 249, 234) 100%);
+        --content-text-fill-color: transparent;
+
+        /* Hover Content Properties */
+        --hover-content-border-style: dashed;
+        --hover-content-border-radius: 10px;
+        --hover-content-border-width: 2px;
+        --hover-content-padding: 20px;
+        
+        /* Hover Content Glow */
+        --hover-box-shadow-color-main: 144, 0, 255;
+        --hover-box-shadow-color-main-alpha: 0.45;
+        --content-horizontal-shadow: 0px;
+        --content-vertical-shadow: -1px;
+        --content-blur-radius: 25px;
+    }
+    </style>
+  </head>
+
+  <body>
+    
+
+    <div id="mainEdit">
+
+    <div id="commitLine">
+      <div class="timeline" id="timeline"></div>
+    </div>
+
+
+
+    </div>
+    <script type="module">
+      import "./js/designer.js";
+    </script>
+    
+    <script>
+      function toggleArrowClass() {
+        var pointerType = getComputedStyle(document.documentElement).getPropertyValue('--pointer-type').trim();
+        var leftElements = document.querySelectorAll('.left');
+        var rightElements = document.querySelectorAll('.right');
+
+        leftElements.forEach(function (element) {
+          element.classList.remove('arrow', 'line');
+        });
+
+        rightElements.forEach(function (element) {
+          element.classList.remove('arrow', 'line');
+        });
+
+        leftElements.forEach(function (element) {
+            if (pointerType === 'arrow' || pointerType === 'arro') {
+            element.classList.add('arrow');
+          } else if (pointerType === 'line' || pointerType === 'lin') {
+            element.classList.add('line');
+          }
+        });
+
+        rightElements.forEach(function (element) {
+          if (pointerType === 'arrow' || pointerType === 'arro') {
+            element.classList.add('arrow');
+          } else if (pointerType === 'line' || pointerType === 'lin') {
+            element.classList.add('line');
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>

@@ -9,7 +9,7 @@
     flex-wrap: wrap;
 }
 
-#repository {
+#repository, #theme {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +23,25 @@
     max-width: 900px;
     width: calc(100% - 80px); 
     margin: 0 auto; 
+    transition: all 450ms ease-in-out;
 }
+
+#repository:hover, #theme:hover {
+    color: blueviolet;
+    border-color: #683FEA;
+    box-shadow: 0px 0px 0px 4px #683FEA;
+    border-radius: 15px;
+    box-shadow: 2px 2px 44px 0px rgba(136, 0, 255, 0.174);
+    -webkit-box-shadow: 2px 2px 44px 0px rgba(136, 0, 255, 0.252);
+    -moz-box-shadow: 2px 2px 44px 0px rgba(136, 0, 255, 0.344);
+}
+
+
+#theme {
+    margin-top: 10px;
+}
+
+
 
 .menu-btn {
     margin: .25em;    
@@ -54,7 +72,7 @@ body {
     background-color: #000000;
     font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
-    margin: 0;
+    margin: auto 0;
     padding: 0;
 }
 
