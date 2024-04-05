@@ -7,7 +7,7 @@
  * #commitLine:
  * - Sets padding and background color for the element with id "commitLine".
  * 
- * .timeline:
+ * #timeline:
  * - Styles the actual timeline (vertical ruler) element.
  * 
  * .title:
@@ -22,7 +22,7 @@
  * .attribution:
  * - Styles the attribution element.
  * 
- * .timeline::after:
+ * #timeline::after:
  * - Styles the vertical ruler line.
  * 
  * .container:
@@ -79,7 +79,7 @@
 }
 
 /* (the vertical ruler) */
-.timeline {
+#timeline {
     position: relative;
     max-width: var(--content-max-width);
     margin: 0 auto;
@@ -122,7 +122,7 @@
 }
 
 /* The actual timeline (the vertical ruler) */
-.timeline::after {
+#timeline::after {
     content: '';
     position: absolute;
     width: var(--vertical-ruler-thickness);
@@ -258,7 +258,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    .timeline::after {
+    #timeline::after {
         left: 31px;
     }
 
