@@ -131,7 +131,54 @@ function constructCommitTimeline(commits) {
 
 document.addEventListener('DOMContentLoaded', function () {
     fetchCommitsInterval();
+    const inputFields = document.querySelectorAll('.input-color');
+    inputFields.forEach(inputField => {
+        createColorPicker(inputField);
+    });
 });
+
+
+
+// Function to create and position the color picker pseudo-element
+function createColorPicker(inputField) {
+    
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+
+    
+    colorPicker.style.position = 'absolute';
+    colorPicker.style.right = '5px'; 
+    colorPicker.style.top = '50%';
+    colorPicker.style.transform = 'translateY(-50%)';
+    colorPicker.style.height = '20px'; 
+
+    
+    colorPicker.addEventListener('change', function() {
+        const hexColor = colorPicker.value; 
+        const rgbColor = hexToRgb(hexColor); 
+        inputField.value = rgbColor; 
+    });
+
+    
+    // Get the label element associated with the input field
+    const label = inputField.parentNode.querySelector('label');
+    // Append the color picker to the label
+   
+    label.appendChild(colorPicker);
+}
+
+
+function hexToRgb(hex) {
+    
+    hex = hex.replace('#', '');
+    
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    
+    return `(${r},${g},${b})`;
+}
+
 
 
 

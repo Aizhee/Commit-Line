@@ -99,23 +99,25 @@
 
     <div id="settings">
         
-        <h3>Main Colors</h3><label for="primary-color">primary-color:</label><input type="text" id="primary-color"
-            class="css-variable" value="128, 0, 255"><br><label for="secondary-color">secondary-color:</label><input type="text"
-            id="secondary-color" class="css-variable" value="255, 255, 255"><br><label
+        <h3>Main Colors</h3>
+        <label for="primary-color">primary-color:</label><input type="text" id="primary-color"
+            class="css-variable input-color" value="128, 0, 255"><br>
+            <label for="secondary-color">secondary-color:</label><input type="text"
+            id="secondary-color" class="css-variable input-color" value="255, 255, 255"><br><label
             for="background-color-property">background-color-property:</label><input type="text" id="background-color-property"
-            class="css-variable" value="0, 0, 0"><br><label for="background-transparency">background-transparency:</label><input
+            class="css-variable input-color" value="0, 0, 0"><br><label for="background-transparency">background-transparency:</label><input
             type="text" id="background-transparency" class="css-variable" value="0.973"><br>
         <h3>Text Colors</h3><label for="text-color-title">text-color-title:</label><input type="text" id="text-color-title"
-            class="css-variable" value="255, 255, 255"><br><label for="text-color-primary">text-color-primary:</label><input
-            type="text" id="text-color-primary" class="css-variable" value="255, 255, 255"><br><label
+            class="css-variable input-color" value="255, 255, 255"><br><label for="text-color-primary">text-color-primary:</label><input
+            type="text" id="text-color-primary" class="css-variable input-color" value="255, 255, 255"><br><label
             for="text-color-secondary">text-color-secondary:</label><input type="text" id="text-color-secondary"
-            class="css-variable" value="74, 74, 74"><br>
+            class="css-variable input-color" value="74, 74, 74"><br>
         <h3>Content Properties</h3><label for="content-background-color">content-background-color:</label><input type="text"
-            id="content-background-color" class="css-variable" value="0, 0, 0"><br><label
+            id="content-background-color" class="css-variable input-color" value="0, 0, 0"><br><label
             for="content-background-color-alpha">content-background-color-alpha:</label><input type="text"
             id="content-background-color-alpha" class="css-variable" value="1"><br><label
             for="content-border-color">content-border-color:</label><input type="text" id="content-border-color"
-            class="css-variable" value="255, 255, 255"><br><label
+            class="css-variable input-color" value="255, 255, 255"><br><label
             for="content-border-radius">content-border-radius:</label><input type="text" id="content-border-radius"
             class="css-variable" value="5px"><br><label for="content-border-width">content-border-width:</label><input
             type="text" id="content-border-width" class="css-variable" value="2px"><br><label
@@ -142,7 +144,7 @@
         <h3>Pointer Properties (line or arrow)</h3><label for="pointer-type">pointer-type:</label><input type="text" id="pointer-type"
             class="css-variable" value="line"><br>
         <h3>Branch(Line) Properties</h3><label for="branch-color">branch-color:</label><input type="text" id="branch-color"
-            class="css-variable" value="128, 0, 255"><br><label for="branch-thickness">branch-thickness:</label><input
+            class="css-variable input-color" value="128, 0, 255"><br><label for="branch-thickness">branch-thickness:</label><input
             type="text" id="branch-thickness" class="css-variable" value="3px"><br><label
             for="branch-width">branch-width:</label><input type="text" id="branch-width" class="css-variable" value="30px"><br>
         <h3>Arrow (set pointer-type to arrow to activate)</h3><label for="pointer-size-arrow">pointer-size-arrow:</label><input type="text"
@@ -150,11 +152,11 @@
         <h3>Ruler Properties</h3><label for="vertical-ruler-thickness">vertical-ruler-thickness:</label><input type="text"
             id="vertical-ruler-thickness" class="css-variable" value="5px"><br><label
             for="vertical-ruler-color-start">vertical-ruler-color-start:</label><input type="text"
-            id="vertical-ruler-color-start" class="css-variable" value="255, 255, 255"><br><label
+            id="vertical-ruler-color-start" class="css-variable input-color" value="255, 255, 255"><br><label
             for="vertical-ruler-color-start-alpha">vertical-ruler-color-start-alpha:</label><input type="text"
             id="vertical-ruler-color-start-alpha" class="css-variable" value="1"><br><label
             for="vertical-ruler-color-end">vertical-ruler-color-end:</label><input type="text" id="vertical-ruler-color-end"
-            class="css-variable" value="255, 255, 255"><br><label
+            class="css-variable input-color" value="255, 255, 255"><br><label
             for="vertical-ruler-color-end-alpha">vertical-ruler-color-end-alpha:</label><input type="text"
             id="vertical-ruler-color-end-alpha" class="css-variable" value="0"><br>
         <h3>Dot Properties</h3><label for="dot-size">dot-size:</label><input type="text" id="dot-size" class="css-variable"
@@ -163,7 +165,7 @@
         <h3>Pointer Properties</h3><label for="pointer-position">pointer-position:</label><input type="text" id="pointer-position"
             class="css-variable" value="20px"><br>
         <h3>Dot Glow</h3><label for="dot-box-shadow-color">dot-box-shadow-color:</label><input type="text"
-            id="dot-box-shadow-color" class="css-variable" value="144, 0, 255"><br><label
+            id="dot-box-shadow-color" class="css-variable input-color" value="144, 0, 255"><br><label
             for="dot-box-shadow-color-alpha">dot-box-shadow-color-alpha:</label><input type="text"
             id="dot-box-shadow-color-alpha" class="css-variable" value="1"><br><label
             for="horizontal-shadow">horizontal-shadow:</label><input type="text" id="horizontal-shadow" class="css-variable"
@@ -176,17 +178,17 @@
             for="transition-property-bezier-curve">transition-property-bezier-curve:</label><input type="text"
             id="transition-property-bezier-curve" class="css-variable" value="ease-in-out"><br><label
             for="hover-content-background-color">hover-content-background-color:</label><input type="text"
-            id="hover-content-background-color" class="css-variable" value="0, 0, 0"><br><label
+            id="hover-content-background-color" class="css-variable input-color" value="0, 0, 0"><br><label
             for="hover-content-background-color-alpha">hover-content-background-color-alpha:</label><input type="text"
             id="hover-content-background-color-alpha" class="css-variable" value="1"><br><label
             for="hover-content-border-color">hover-content-border-color:</label><input type="text"
-            id="hover-content-border-color" class="css-variable" value="128, 0, 255"><br>
+            id="hover-content-border-color" class="css-variable input-color" value="128, 0, 255"><br>
         <h3>Gradient Background</h3><label
             for="content-text-gradient-background">content-text-gradient-background:</label><input type="text"
             id="content-text-gradient-background" class="css-variable"
             value="linear-gradient(180deg, rgb(49, 86, 252) 0%, rgb(154, 53, 255) 52%, rgb(68, 249, 234) 100%)"><br><label
             for="content-text-fill-color">content-text-fill-color:</label><input type="text" id="content-text-fill-color"
-            class="css-variable" value="transparent"><br>
+            class="css-variable " value="transparent"><br>
         <h3>Hover Content Properties</h3><label for="hover-content-border-style">hover-content-border-style:</label><input
             type="text" id="hover-content-border-style" class="css-variable" value="dashed"><br><label
             for="hover-content-border-radius">hover-content-border-radius:</label><input type="text"
@@ -196,7 +198,7 @@
             for="hover-content-padding">hover-content-padding:</label><input type="text" id="hover-content-padding"
             class="css-variable" value="20px"><br>
         <h3>Hover Content Glow</h3><label for="hover-box-shadow-color-main">hover-box-shadow-color-main:</label><input
-            type="text" id="hover-box-shadow-color-main" class="css-variable" value="144, 0, 255"><br><label
+            type="text" id="hover-box-shadow-color-main" class="css-variable input-color" value="144, 0, 255"><br><label
             for="hover-box-shadow-color-main-alpha">hover-box-shadow-color-main-alpha:</label><input type="text"
             id="hover-box-shadow-color-main-alpha" class="css-variable" value="0.45"><br><label
             for="content-horizontal-shadow">content-horizontal-shadow:</label><input type="text" id="content-horizontal-shadow"
@@ -255,6 +257,12 @@
         window.onload = applyCSSVariables;
         document.getElementById('copyCode').addEventListener('click', applyCSSVariables);
         var inputs = document.querySelectorAll('.css-variable');
+        
+        const inputFields = document.querySelectorAll('.input-color');
+        inputFields.forEach(inputField => {
+            createColorPicker(inputField);
+        });
+
         inputs.forEach(function (input) {
             input.addEventListener('input', function () {
                 applyCSSVariables();
@@ -278,27 +286,69 @@
     createToast('success', 'fa-solid fa-check-circle', title, text);
 }
 
-function errorToast(title, text){
-    createToast('error', 'fa-solid fa-exclamation-circle', title, text);
-}
+        function errorToast(title, text){
+            createToast('error', 'fa-solid fa-exclamation-circle', title, text);
+        }
 
-function createToast(type, icon, title, text){
-    const notifications = document.getElementById('notifications');
-    let newToast = document.createElement('div');
-    newToast.innerHTML = `
-        <div class="toast ${type}">
-            <i class="${icon}"></i>
-            <div class="contentz">
-                <div class="titlez">${title}</div>
-                <span>${text}</span>
-            </div>
-            <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
-        </div>`;
-    notifications.appendChild(newToast);
-    newToast.timeOut = setTimeout(
-        ()=>newToast.remove(), 20000
-    )
-}
+        function createToast(type, icon, title, text){
+            const notifications = document.getElementById('notifications');
+            let newToast = document.createElement('div');
+            newToast.innerHTML = `
+                <div class="toast ${type}">
+                    <i class="${icon}"></i>
+                    <div class="contentz">
+                        <div class="titlez">${title}</div>
+                        <span>${text}</span>
+                    </div>
+                    <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+                </div>`;
+            notifications.appendChild(newToast);
+            newToast.timeOut = setTimeout(
+                ()=>newToast.remove(), 20000
+            )
+        }
+
+        function createColorPicker(inputField) {
+            const colorPicker = document.createElement('input');
+            colorPicker.type = 'color';
+            colorPicker.style.position = 'relative';
+            colorPicker.style.marginLeft = '10px'; 
+            colorPicker.style.verticalAlign = 'middle';
+            colorPicker.style.height = '20px'; 
+            colorPicker.value = rgbToHex(inputField.value); 
+
+            colorPicker.addEventListener('input', function() {
+              const hexColor = colorPicker.value; 
+              const rgbColor = hexToRgb(hexColor); 
+              inputField.value = rgbColor; 
+              applyCSSVariables();
+            });
+
+            const label = inputField.previousElementSibling; 
+            label.appendChild(colorPicker); 
+        }
+
+        function rgbToHex(rgb) {
+            const rgbArray = rgb.split(',');
+            const r = parseInt(rgbArray[0].trim());
+            const g = parseInt(rgbArray[1].trim());
+            const b = parseInt(rgbArray[2].trim());
+            const hexR = r.toString(16).padStart(2, '0');
+            const hexG = g.toString(16).padStart(2, '0');
+            const hexB = b.toString(16).padStart(2, '0');
+            return `#${hexR}${hexG}${hexB}`;
+        }
+
+        function hexToRgb(hex) {
+            
+            hex = hex.replace('#', '');
+            
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            
+            return `${r},${g},${b}`;
+        }
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
