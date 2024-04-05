@@ -222,8 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (hvisible === '0') {
-                doc
-                ument.getElementById('heading').style.display = 'none';
+                document.getElementById('heading').style.display = 'none';
             }
         } else {
             document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
