@@ -116,6 +116,10 @@ generateCommitLine(repositoryURL, timelineContainerID, commitlineContainerID, de
 
 You can try out Commit-Line with our live demo [here](https://aizhee.github.io/Commit-Line/).
 
+## Wiki
+
+More detailed wiki available [here](https://github.com/Aizhee/Commit-Line/wiki).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
