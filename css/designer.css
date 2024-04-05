@@ -95,3 +95,22 @@ label{
     flex-wrap: wrap;
     margin: 0 auto;
 }
+
+#Error{
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #commitLinee, #heading, #settings, .gutter {
+        display: none;
+    }
+
+    #Error {
+        margin-top: 50%;
+        display: block;
+        text-align: center;
+        color: #ffffff;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
