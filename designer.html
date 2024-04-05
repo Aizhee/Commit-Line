@@ -6,6 +6,7 @@
     <title>🎨CL Theme Editor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/base-theme.css" />
     <link rel="stylesheet" href="css/designer.css" />
+    <link rel="stylesheet" href="css/notificationDesign.css">
   </head>
 
   <body>
@@ -36,6 +38,8 @@
         COMMIT-LINE
       </h1>
       <h2 style="color: rgb(61, 60, 60); text-align: center">Theme Editor</h2>
+
+      <div id="notifications"></div>
 
       <input
         type="text"
@@ -254,13 +258,40 @@
         var themeValue = document.getElementById('theme').value;
         navigator.clipboard.writeText(themeValue)
             .then(function() {
-                alert('Copying to clipboard was successful!');
+                sucessToast("Copied!", 'Go back to Commit-Line and paste it in the Theme Code input field and click "Generate" to see the changes')
             })
             .catch(function(err) {
-                console.error('Could not copy text: ', err);
+                errorToast("Error!", 'Could not copy text: ', err)
             });
             
         });
+
+        function sucessToast(title, text){
+    createToast('success', 'fa-solid fa-check-circle', title, text);
+}
+
+function errorToast(title, text){
+    createToast('error', 'fa-solid fa-exclamation-circle', title, text);
+}
+
+function createToast(type, icon, title, text){
+    const notifications = document.getElementById('notifications');
+    let newToast = document.createElement('div');
+    newToast.innerHTML = `
+        <div class="toast ${type}">
+            <i class="${icon}"></i>
+            <div class="contentz">
+                <div class="titlez">${title}</div>
+                <span>${text}</span>
+            </div>
+            <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+        </div>`;
+    notifications.appendChild(newToast);
+    newToast.timeOut = setTimeout(
+        ()=>newToast.remove(), 20000
+    )
+}
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
     <script src="https://unpkg.com/split.js/dist/split.min.js"></script>

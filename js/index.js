@@ -1,4 +1,3 @@
-
 import randomUseragent from 'https://cdn.jsdelivr.net/npm/random-useragent@0.5.0/+esm'
 
 function extractGitHubInfo(url) {
@@ -13,15 +12,14 @@ function updateRepo() {
     const theme = document.getElementById('theme').value;
     const repositoryURL = document.getElementById('repository').value;
     const { username, repo } = extractGitHubInfo(repositoryURL);
+
     if (username && repo) {
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('url', repositoryURL);
         urlParams.set('theme', theme);
         window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
         location.reload(true);
-
     } else {
-        document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
         errorToast("Invalid GitHub Repository URL", "Please enter a valid GitHub Repository URL");
     }
 }
@@ -92,7 +90,6 @@ function fetchCommitsInterval(username, repo) {
              })
              .catch(error => {
                  console.error('Error fetching data:', error);
-                 document.querySelector('.error').textContent = 'Error fetching data';
                  errorToast("Error fetching data", "Please try again later");
              });
             }
@@ -214,12 +211,13 @@ function errorToast(title, text){
 }
 
 function createToast(type, icon, title, text){
+    const notifications = document.getElementById('notifications');
     let newToast = document.createElement('div');
     newToast.innerHTML = `
         <div class="toast ${type}">
             <i class="${icon}"></i>
-            <div class="content">
-                <div class="title">${title}</div>
+            <div class="contentz">
+                <div class="titlez">${title}</div>
                 <span>${text}</span>
             </div>
             <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
@@ -244,7 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const themeElement = document.getElementById('theme');
             themeElement.value = theme;
             fetchCommitsInterval(username, repo);
-
             if (theme !== null) {
                 decompress(theme);
             }
@@ -266,10 +263,24 @@ function getRandomUserAgent() {
 }
 
 document.getElementById('updateLink').addEventListener('click', updateRepo);
-document.getElementById('shareURL').addEventListener('click', shareURL);
-document.getElementById('shareIFrame').addEventListener('click', shareIFrame);
-document.getElementById('copyCode').addEventListener('click', copyCode);
+document.getElementById('shareURL').addEventListener('click', () => checkIfGenerated(shareURL));
+document.getElementById('shareIFrame').addEventListener('click', () => checkIfGenerated(shareIFrame));
+document.getElementById('copyCode').addEventListener('click', () => checkIfGenerated(copyCode));
 document.getElementById('changeTheme').addEventListener('click', changeTheme);
+
+function checkIfGenerated(functionName) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const repositoryURL = urlParams.get('url');
+
+    if (repositoryURL !== null) {
+        functionName();
+
+  
+    } else {
+        errorToast("Repository not generated", "Please generate first");
+    }
+}
+
 
 function copyCode() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -376,7 +387,7 @@ function copyCode() {
         </script>
     `)
     .then(() => {
-        sucessToast("Copied!", "Successfully copied code")
+        sucessToast("Copied!", "Successfully copied Code")
       })
       .catch((e) => {
         errorToast("Something went wrong", e);
