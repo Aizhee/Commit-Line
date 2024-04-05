@@ -22,6 +22,7 @@ function updateRepo() {
 
     } else {
         document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
+        errorToast("Invalid GitHub Repository URL", "Please enter a valid GitHub Repository URL");
     }
 }
 
@@ -72,6 +73,7 @@ function fetchCommits(username, repo) {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
+            errorToast("Error fetching data", "Please try again later");
             loadCommitsFromStorage(repo);
         });
 }
@@ -91,6 +93,7 @@ function fetchCommitsInterval(username, repo) {
              .catch(error => {
                  console.error('Error fetching data:', error);
                  document.querySelector('.error').textContent = 'Error fetching data';
+                 errorToast("Error fetching data", "Please try again later");
              });
             }
     fetchData();
@@ -202,6 +205,31 @@ function constructCommitTimeline(commits, repo) {
 
 }
 
+function sucessToast(title, text){
+    createToast('success', 'fa-solid fa-check-circle', title, text);
+}
+
+function errorToast(title, text){
+    createToast('error', 'fa-solid fa-exclamation-circle', title, text);
+}
+
+function createToast(type, icon, title, text){
+    let newToast = document.createElement('div');
+    newToast.innerHTML = `
+        <div class="toast ${type}">
+            <i class="${icon}"></i>
+            <div class="content">
+                <div class="title">${title}</div>
+                <span>${text}</span>
+            </div>
+            <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+        </div>`;
+    notifications.appendChild(newToast);
+    newToast.timeOut = setTimeout(
+        ()=>newToast.remove(), 5000
+    )
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const repositoryURL = urlParams.get('url');
@@ -226,6 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } else {
             document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
+            errorToast("Invalid GitHub Repository URL", "Please enter a valid GitHub Repository URL");
         }
     }
 });
@@ -248,7 +277,7 @@ function copyCode() {
     const theme = urlParams.get('theme');
 
     if (theme !== null) {
-        var decoded = atob(input);
+        var decoded = atob(theme);
         var compressed = new Uint8Array(decoded.length);
         for (var i = 0; i < decoded.length; i++) {
         compressed[i] = decoded.charCodeAt(i);
@@ -342,14 +371,15 @@ function copyCode() {
         </div>
         
         <script type="module">
+            import generateCommitLine from 'https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/js/commit-line.js'
             generateCommitLine('`+ repositoryURL +`', "timeline", "commitLine", 20000)
         </script>
     `)
     .then(() => {
-        alert("Successfully copied code");
+        sucessToast("Copied!", "Successfully copied code")
       })
       .catch((e) => {
-        alert("Something went wrong",e);
+        errorToast("Something went wrong", e);
       });
 }
 
@@ -358,11 +388,11 @@ function shareIFrame() {
     const urls = window.location.href;
     navigator.clipboard.writeText(`<iframe src="${urls}" width="100%" height="100%" style="border: none;"></iframe>`)
     .then(() => {
-        alert("Successfully copied IFrame");
+        sucessToast("Copied!", "Successfully copied IFrame")
         showHeading()
       })
       .catch((e) => {
-        alert("Something went wrong",e);
+        errorToast("Something went wrong", e);
         showHeading()
       });
     
@@ -373,11 +403,11 @@ function shareURL() {
     const urls = window.location.href;
     navigator.clipboard.writeText(urls)
     .then(() => {
-        alert("Successfully copied URL");
+        sucessToast("Copied!", "Successfully copied URL")
         showHeading()
       })
       .catch((e) => {
-        alert("Something went wrong",e);
+        errorToast("Something went wrong", e);
         showHeading()
       });
 }
