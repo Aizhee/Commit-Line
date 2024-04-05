@@ -1,12 +1,22 @@
+/**
+ * Generates a commit line for a given GitHub repository.
+ *
+ * @param {string} repositoryURL - The URL of the GitHub repository.
+ * @param {string} timelineContainerID - The ID of the timeline container element.
+ * @param {string} commitlineContainerID - The ID of the commit line container element.
+ * @param {number} delay - The delay between each fetch of commits (in milliseconds).
+ * @param {string} locale - The locale to use for formatting timestamps.
+ * @param {string} timestampFormat - The format to use for displaying timestamps.
+ */
+
 export default function generateCommitLine(repositoryURL, timelineContainerID, commitlineContainerID, delay, locale, timestampFormat) {
-    document.addEventListener('DOMContentLoaded', function () {
     const { username, repo } = extractGitHubInfo(repositoryURL);
             if (username && repo) {
                 fetchCommitsInterval(username, repo, delay, timelineContainerID, commitlineContainerID, locale, timestampFormat);
             } else {
                 showErrorMessage('Invalid GitHub repository URL');
             }
-    });
+            
 }
 
 function extractGitHubInfo(url) {
@@ -17,15 +27,8 @@ function extractGitHubInfo(url) {
 }
 
 function fetchCommits(username, repo) {
-    const headers = new Headers();
-
-    const defaultUserAgent = navigator.userAgent;
-    let useragent = defaultUserAgent;
-
-    headers.append('User-Agent', useragent);
-    console.log('fetching commits');
     return fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
-        headers: headers
+    
     })
     .then(async response => {
         if (!response.ok) {

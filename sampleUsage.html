@@ -1,0 +1,47 @@
+
+<!--
+    This HTML file demonstrates the usage of the Commit-Line library.
+    It includes the necessary CSS and JavaScript files and initializes the commit line.
+
+    Usage:
+    1. Include the base-theme.css and variables.css stylesheets from the CDN.
+    2. Create a div element with the id "commitLine" to contain the commit line.
+    3. Inside the "commitLine" div, create another div element with the id "timeline" to display the timeline.
+    4. Import the generateCommitLine function from the commit-line.js file using the ES6 module syntax.
+    5. Define the timestampFormat object to specify the format of the timestamps to be displayed.
+    6. Call the generateCommitLine function with the following parameters:
+        - The GitHub repository URL.
+        - The id of the timeline div.
+        - The id of the commitLine div.
+        - The interval (in milliseconds) between each commit update.
+        - The locale string for the timestamp format.
+        - The timestampFormat object.
+
+    Note: Make sure to replace the GitHub repository URL with your own.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/base-theme.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/variables.css">
+</head>
+<body>
+    <div id="commitLine">
+        <div id="timeline"></div>
+    </div>
+    
+    <script type="module">
+        import generateCommitLine from 'https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/js/commit-line.js'
+        timestampFormat = {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true
+        };
+        generateCommitLine('https://github.com/Aizhee/Commit-Line', "timeline", "commitLine", 60000, 'en-US', timestampFormat)
+    </script>
+</body>
+</html>

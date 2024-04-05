@@ -1,11 +1,5 @@
-import randomUseragent from 'https://cdn.jsdelivr.net/npm/random-useragent@0.5.0/+esm'
+import generateCommitLine from './commit-line.js';
 
-function extractGitHubInfo(url) {
-    const parts = url.split('/');
-    const username = parts[parts.length - 2];
-    const repo = parts[parts.length - 1];
-    return { username, repo };
-}
 
 // Function to update repository based on input URL
 function updateRepo() {
@@ -24,183 +18,13 @@ function updateRepo() {
     }
 }
 
-// Function to fetch commits from GitHub
-function fetchCommits(username, repo) {
-    const headers = new Headers();
-
-    const defaultUserAgent = navigator.userAgent;
-    let useragent = defaultUserAgent;
-
-    headers.append('User-Agent', useragent);
-    console.log('fetching commits');
-    return fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
-        headers: headers
-    })
-        .then(async response => {
-            if (!response.ok) {
-                useragent = getRandomUserAgent();
-                console.log(useragent);
-                headers.set('User-Agent', useragent);
-
-                let response;
-                let iterationCount = 0;
-
-                do {
-                    response = await fetchCommitsAsync(username, repo, headers);
-                    await new Promise(resolve => setTimeout(resolve, 60000));
-                    iterationCount++;
-                } while (!response.ok && iterationCount < 5);
-
-                if (iterationCount === 5) {
-                    const storedCommits = localStorage.getItem('commits');
-                    if (storedCommits !== undefined) {
-                        const commits = JSON.parse(storedCommits);
-                        return commits;
-                    }
-                }
-
-                return response.json();
-            }
-
-            async function fetchCommitsAsync(username, repo, headers) {
-                return await fetch(`https://api.github.com/repos/${username}/${repo}/commits`, {
-                    headers: headers
-                });
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            errorToast("Error fetching data", "Please try again later");
-            loadCommitsFromStorage(repo);
-        });
+function extractGitHubInfo(url) {
+    const parts = url.split('/');
+    const username = parts[parts.length - 2];
+    const repo = parts[parts.length - 1];
+    return { username, repo };
 }
 
-function fetchCommitsInterval(username, repo) {
-
-
-    function fetchData() {
-         fetchCommits(username, repo) // Pass username and repo
-             .then(commits => {
-                 // Store fetched data in local storage
-                 localStorage.removeItem('commits');
-                 console.log('deleted local storage');
-                 localStorage.setItem('commits', JSON.stringify(commits));
-                 loadCommitsFromStorage(repo);
-             })
-             .catch(error => {
-                 console.error('Error fetching data:', error);
-                 errorToast("Error fetching data", "Please try again later");
-             });
-            }
-    fetchData();
-    setInterval(fetchData, getRandomInt(60000, 12000));
-}
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// Function to load commits from local storage
-function loadCommitsFromStorage(repo) {
-    console.log('reading local storage');
-    const storedCommits = localStorage.getItem('commits');
-    if (storedCommits !== undefined) {
-        const commits = JSON.parse(storedCommits);
-        constructCommitTimeline(commits, repo);
-    }
-}
-
-// Function to construct timeline items for commits
-function constructCommitTimeline(commits, repo) {
-    
-    const title = document.querySelector('.title') || document.createElement('h1');
-    const error = document.querySelector('.error') || document.createElement('p');
-
-    error.className = 'error';
-    title.className = 'title';
-
-    title.textContent = ''; 
-    title.textContent = repo; 
-
-    error.textContent = '';
-
-    const timeline = document.getElementById('timeline');
-    const commitLine = document.getElementById('commitLine');
-    
-    if (!timeline) {
-        const newTimeline = document.createElement('div');
-        newTimeline.id = 'timeline';
-        commitLine.appendChild(newTimeline);
-    } else {
-        timeline.innerHTML = '';
-    }
-
-    
-    commitLine.insertBefore(error, timeline);
-    commitLine.insertBefore(title, error);
-
-    const existingAttribution = document.querySelector('.attribution');
-    if (existingAttribution) {
-        existingAttribution.remove();
-    } 
-
-    if (!document.querySelector('.attribution')) {
-        const attribution = document.createElement('p');
-        attribution.className = 'attribution';
-        attribution.innerHTML = '';
-        
-        attribution.style.color = 'rgba(75, 74, 74, 0.432)';
-        attribution.style.textAlign = 'center';
-        attribution.style.position = 'relative';
-        attribution.style.bottom = '0';
-        attribution.style.width = '100%';
-        attribution.innerHTML = 'Generated with: <a href="https://aizhee.github.io/Commit-Line/" style="text-decoration: none;color: #2600ff4e;">Commit-Line</a> | Made with ❤️ by: <a href="https://github.com/Aizhee" style="text-decoration: none;color: #2600ff4e;">Aizhe</a>';
-
-        commitLine.appendChild(attribution);
-    }
-
-    if (Array.isArray(commits)) {
-        
-        commits.forEach((commit, index) => {
-            var pointerType = getComputedStyle(document.documentElement).getPropertyValue('--pointer-type').trim();
-            const container = document.createElement('div');
-            container.className = index % 2 === 0 ? 'container left ' + pointerType : 'container right ' + pointerType;
-
-            const content = document.createElement('div');
-            content.className = 'content';
-
-            // Extracting commit message and timestamp
-            const message = commit.commit.message;
-            const timestamp = new Date(commit.commit.author.date).toLocaleString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric', 
-                hour: 'numeric', 
-                minute: 'numeric', 
-                hour12: true 
-            }); // Format timestamp
-
-            // Constructing content with message and timestamp
-            const messageParagraph = document.createElement('p');
-            messageParagraph.className = 'messageText';
-            messageParagraph.textContent = message;
-
-            const timestampParagraph = document.createElement('p');
-            timestampParagraph.className = 'timestampText';
-            timestampParagraph.textContent = timestamp;
-
-            content.appendChild(messageParagraph);
-            content.appendChild(timestampParagraph);
-
-            container.appendChild(content);
-            timeline.appendChild(container);
-        });
-    } else {
-        error.textContent = 'No commits found';
-    }
-
-}
 
 function sucessToast(title, text){
     createToast('success', 'fa-solid fa-check-circle', title, text);
@@ -241,26 +65,28 @@ document.addEventListener('DOMContentLoaded', function () {
             repositoryURLElement.value = repositoryURL;
             const themeElement = document.getElementById('theme');
             themeElement.value = theme;
-            fetchCommitsInterval(username, repo);
-            if (theme !== null) {
+            
+            generateCommitLine(repositoryURL, "timeline", "commitLine", 60000);
+
+            if (theme !== null && theme !== '' && theme !== undefined) {
                 decompress(theme);
             }
 
             if (hvisible === '0') {
                 document.getElementById('heading').style.display = 'none';
             }
+
+            
         } else {
-            document.querySelector('.error').textContent = 'Invalid GitHub Repository URL';
             errorToast("Invalid GitHub Repository URL", "Please enter a valid GitHub Repository URL");
+            const errorElement = document.querySelector('.error');
+            if (errorElement) {
+                errorElement.textContent = 'Invalid GitHub Repository URL';
+            }
         }
     }
 });
 
-function getRandomUserAgent() {
-    const userAgent = randomUseragent.getRandom();
-     console.log(userAgent);
-    return userAgent;
-}
 
 document.getElementById('updateLink').addEventListener('click', updateRepo);
 document.getElementById('shareURL').addEventListener('click', () => checkIfGenerated(shareURL));
@@ -287,7 +113,7 @@ function copyCode() {
     const repositoryURL = urlParams.get('url');
     const theme = urlParams.get('theme');
 
-    if (theme !== null) {
+    if (theme !== null, theme !== '', theme !== undefined) {
         var decoded = atob(theme);
         var compressed = new Uint8Array(decoded.length);
         for (var i = 0; i < decoded.length; i++) {
@@ -296,7 +122,6 @@ function copyCode() {
         var decompressed = pako.inflate(compressed, { to: 'string' });
         var themeProperties = decompressed.split('$');
 
-        var root = document.documentElement;
         var variableNames = [
         "--primary-color",
         "--secondary-color",
@@ -370,7 +195,7 @@ function copyCode() {
     `;
 
     } else {
-        var StyleStr = `<link rel="stylesheet" href="css/variables.css">`
+        var StyleStr = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/variables.css">`
     }
 
     navigator.clipboard.writeText(`
@@ -449,7 +274,7 @@ function decompress(input) {
     var themeProperties = decompressed.split('$');
     updateCSSVariables(themeProperties);
 
-  }
+}
 
   function updateCSSVariables(valuesArray) {
     var root = document.documentElement;
