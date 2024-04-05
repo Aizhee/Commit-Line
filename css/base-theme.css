@@ -1,3 +1,64 @@
+/**
+ * 
+ * Global styles:
+ * - Sets CSS variables for hover box shadow, background color, etc.
+ * - Applies box-sizing: border-box to all elements.
+ * 
+ * #commitLine:
+ * - Sets padding and background color for the element with id "commitLine".
+ * 
+ * .timeline:
+ * - Styles the actual timeline (vertical ruler) element.
+ * 
+ * .title:
+ * - Styles the title element.
+ * 
+ * .messageText:
+ * - Styles the commit message text.
+ * 
+ * .timestampText:
+ * - Styles the commit timestamp text.
+ * 
+ * .attribution:
+ * - Styles the attribution element.
+ * 
+ * .timeline::after:
+ * - Styles the vertical ruler line.
+ * 
+ * .container:
+ * - Styles the container around content.
+ * 
+ * .container::after:
+ * - Styles the circles on the timeline.
+ * 
+ * .right::after:
+ * - Fixes the circle for containers on the right side.
+ * 
+ * .left:
+ * - Places the container to the left.
+ * 
+ * .right:
+ * - Places the container to the right.
+ * 
+ * .left.line::before, .right.line::before:
+ * - Adds lines to the left and right containers.
+ * 
+ * .left.arrow::before, .right.arrow::before:
+ * - Adds arrows to the left and right containers.
+ * 
+ * .content:
+ * - Styles the actual content.
+ * 
+ * .content:hover:
+ * - Styles the content when hovered.
+ * 
+ * .content:hover > p:
+ * - Styles the paragraph inside the content when hovered.
+ * 
+ * Media queries:
+ * - Applies responsive styles for screens with max-width of 600px.
+ */
+
 /* Global styles */
 :root {
     
@@ -10,21 +71,21 @@
 * {
     box-sizing: border-box;
 }
-
+/* Containter Style */
 #commitLine{
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: var(--background-color);
-
 }
 
-/* The actual timeline (the vertical ruler) */
+/* (the vertical ruler) */
 .timeline {
     position: relative;
     max-width: var(--content-max-width);
     margin: 0 auto;
 }
 
+/* Main Title */
 .title{
     color: rgb(var(--text-color-title));
     font-family: var(--font-family-global);
@@ -32,8 +93,10 @@
     font-weight: 600;
     margin: 1em;
     margin-bottom: 100px;
+    text-align: center;
 }
 
+/* Commit Message */
 .messageText {
     margin-top: -1px;
     color: rgb(var(--text-color-primary));
@@ -42,6 +105,7 @@
     font-weight: var(--font-weight-commit-message);
 }
 
+/* Commit Timestamp */
 .timestampText {
     margin-top: var(--margin-top-time);
     color: rgb(var(--text-color-secondary));
@@ -50,6 +114,7 @@
     font-weight: var(--font-weight-commit-time);
 }
 
+/* Attribution (Hide this if you want)*/
 .attribution{
     padding-bottom: 5px;
     font-family:  "Outfit", sans-serif;
