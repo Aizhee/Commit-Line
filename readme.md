@@ -5,15 +5,18 @@
 Commit-Line is a customizable timeline generator for public GitHub repositories. It automatically updates to reflect the latest commits made to the repository. With Commit-Line, you can create a dynamic timeline of your project's development history and share it easily via a shareable link, iframe, or HTML code snippet.
 
 [![SVDCU.gif](https://s12.gifyu.com/images/SVDCU.gif)](https://gifyu.com/image/SVDCU)
-
+[![SVD5y.png](https://s12.gifyu.com/images/SVD5y.png)](https://gifyu.com/image/SVD5y)
 ## Features
 
 - **Dynamic Timeline**: Generates a timeline based on the commit history of a public GitHub repository.
 - **Auto Updates**: Automatically updates to reflect the latest commits in the repository.
 - **Customizable**: Customize the appearance and behavior of the timeline to suit your needs.
 [![SVDVT.gif](https://s12.gifyu.com/images/SVDVT.gif)](https://gifyu.com/image/SVDVT)
+[![SVDDO.png](https://s12.gifyu.com/images/SVDDO.png)](https://gifyu.com/image/SVDDO)
 - **Shareable**: Easily share your timeline using a shareable link, iframe, or HTML code snippet.
 [![SVDVj.png](https://s9.gifyu.com/images/SVDVj.png)](https://gifyu.com/image/SVDVj)
+- **Responsive**: Adjusts to screen size.
+[![SVDoH.png](https://s12.gifyu.com/images/SVDoH.png)](https://gifyu.com/image/SVDoH)
 ## Usage (Demo)
 
 1. **Input GitHub Repository**: Provide the URL of the public GitHub repository you want to generate the timeline for.
