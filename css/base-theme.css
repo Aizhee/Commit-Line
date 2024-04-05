@@ -156,7 +156,7 @@
     -webkit-box-shadow: var(--horizontal-shadow) var(--vertical-shadow) var(--blur-radius) 0px rgba(var(--dot-box-shadow-color),var(--dot-box-shadow-color-alpha));
     -moz-box-shadow: var(--horizontal-shadow) var(--vertical-shadow) var(--blur-radius) 0px rgba(var(--dot-box-shadow-color),var(--dot-box-shadow-color-alpha));
     
-    top: var(--ponter-poition);
+    top: var(--pointer-position);
     border-radius: var(--dot-border-radius);
     z-index: 1;
 }
@@ -190,7 +190,7 @@
 /* Add arrows to the left container (pointing right) */
 .left.line::before {
     height: var(--branch-thickness);
-    top: calc(var(--ponter-poition) + 15px);
+    top: calc(var(--pointer-position) + 15px);
     width: var(--branch-width);
     right: 0;
     background-color: rgb(var(--branch-color));
@@ -198,17 +198,17 @@
 
 .left.arrow::before {
     height: 0;
-    top: calc(var(--ponter-poition) + 10px );
+    top: calc(var(--pointer-position) + 10px );
     width: 0;
     right: 30px;
     border: medium solid rgb(var(--primary-color));
-    border-width: var(--ponter-size-arrow) 0 var(--ponter-size-arrow) var(--ponter-size-arrow);
+    border-width: var(--pointer-size-arrow) 0 var(--pointer-size-arrow) var(--pointer-size-arrow);
     border-color: transparent transparent transparent rgb(var(--primary-color));
 } 
 
 .right.line::before {
     height:  var(--branch-thickness);
-    top: calc(var(--ponter-poition) + 15px );
+    top: calc(var(--pointer-position) + 15px );
     left: 0;
     width: var(--branch-width);
     background-color: rgb(var(--branch-color));
@@ -216,11 +216,11 @@
 
 .right.arrow::before {
     height: 0;
-    top: calc(var(--ponter-poition) + 10px );
+    top: calc(var(--pointer-position) + 10px );
     width: 0;
     left: 30px;
     border: medium solid rgb(var(--primary-color));
-    border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+    border-width: var(--pointer-size-arrow) var(--pointer-size-arrow) var(--pointer-size-arrow) 0;
     border-color: transparent rgb(var(--primary-color)) transparent transparent;
 } 
 
@@ -270,19 +270,19 @@
     }
     
     .container::after{
-        top: calc(var(--ponter-poition) + var(--dot-size)/2 - 10px);
+        top: calc(var(--pointer-position) + var(--dot-size)/2 - 10px);
     }
     
     
     .left.arrow::before , .right.arrow::before {
-        top: calc(var(--ponter-poition) + 10px );
+        top: calc(var(--pointer-position) + 10px );
     } 
     
 
     .left.arrow::before {
         left: 61px;
         border: medium solid rgb(var(--primary-color));
-        border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+        border-width: var(--pointer-size-arrow) var(--pointer-size-arrow) var(--pointer-size-arrow) 0;
         border-color: transparent rgb(var(--primary-color)) transparent transparent;
     } 
 
@@ -298,7 +298,7 @@
     .right.arrow::before {
         left: 61px;
         border: medium solid rgb(var(--primary-color));
-        border-width: var(--ponter-size-arrow) var(--ponter-size-arrow) var(--ponter-size-arrow) 0;
+        border-width: var(--pointer-size-arrow) var(--pointer-size-arrow) var(--pointer-size-arrow) 0;
         border-color: transparent rgb(var(--primary-color)) transparent transparent;
     } 
 

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             repositoryURLElement.value = repositoryURL;
             const themeElement = document.getElementById('theme');
             themeElement.value = theme;
-            
+
             generateCommitLine(repositoryURL, "timeline", "commitLine", 60000);
 
             if (theme !== null && theme !== '' && theme !== undefined) {
@@ -150,7 +150,7 @@ function copyCode() {
         "--branch-color",
         "--branch-thickness",
         "--branch-width",
-        "--ponter-size-arrow",
+        "--pointer-size-arrow",
         "--vertical-ruler-thickness",
         "--vertical-ruler-color-start",
         "--vertical-ruler-color-start-alpha",
@@ -158,7 +158,7 @@ function copyCode() {
         "--vertical-ruler-color-end-alpha",
         "--dot-size",
         "--dot-border-radius",
-        "--ponter-poition",
+        "--pointer-position",
         "--dot-box-shadow-color",
         "--dot-box-shadow-color-alpha",
         "--horizontal-shadow",
@@ -306,7 +306,7 @@ function decompress(input) {
       "--branch-color",
       "--branch-thickness",
       "--branch-width",
-      "--ponter-size-arrow",
+      "--pointer-size-arrow",
       "--vertical-ruler-thickness",
       "--vertical-ruler-color-start",
       "--vertical-ruler-color-start-alpha",
@@ -314,7 +314,7 @@ function decompress(input) {
       "--vertical-ruler-color-end-alpha",
       "--dot-size",
       "--dot-border-radius",
-      "--ponter-poition",
+      "--pointer-position",
       "--dot-box-shadow-color",
       "--dot-box-shadow-color-alpha",
       "--horizontal-shadow",
