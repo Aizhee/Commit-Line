@@ -9,7 +9,7 @@ Commit-Line is a customizable timeline generator for public GitHub repositories.
 ## Features
 
 - **Dynamic Timeline**: Generates a timeline based on the commit history of a public GitHub repository.
-- **Auto Updates**: Automatically updates to reflect the latest commits in the repository.
+- **Auto Updates: Automatically update to reflect the latest commits in the repository.
 - **Customizable**: Customize the appearance and behavior of the timeline to suit your needs.
 [![SVDVT.gif](https://s12.gifyu.com/images/SVDVT.gif)](https://gifyu.com/image/SVDVT)
 [![SVDDO.png](https://s12.gifyu.com/images/SVDDO.png)](https://gifyu.com/image/SVDDO)
@@ -32,7 +32,7 @@ Commit-Line is a customizable timeline generator for public GitHub repositories.
 <!--Modify this in Theme Editor-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/variables.css">
 ```
-2. **Add two elements with unique ID's**: In this case, an inner div with the ID ```timeline``` and an outer div ```commitLine```
+2. **Add two elements **with unique **IDs: In this case, an inner div with the ID ```timeline``` and an outer div ```commitLine```
 ```html
 <div id="commitLine">
     <div id="timeline"></div>
@@ -136,6 +136,14 @@ Contributions are welcome! For major changes, please open an issue first to disc
 ## Acknowledgments
 
 - [GitHub API](https://docs.github.com/en/rest) for providing access to repository data.
+
+- Used JS libraries on [Demo Website](https://aizhee.github.io/Commit-Line/).
+
+    - [html-to-image](https://github.com/bubkoo/html-to-image) for converting HTML to image.
+    - [FileSaver.js](https://github.com/eligrey/FileSaver.js/) for saving files on the client-side.
+    - [pako](https://github.com/nodeca/pako) for JavaScript data compression in theme code.
+    - [split.js](https://github.com/nathancahill/split) for creating resizable split views in preview.
+
 
 ---
 
