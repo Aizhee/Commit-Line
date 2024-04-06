@@ -121,6 +121,10 @@ You can try out Commit-Line with our live demo [here](https://aizhee.github.io/C
 
 More detailed wiki available [here](https://github.com/Aizhee/Commit-Line/wiki).
 
+## Community Themes
+
+Want to submit your custom Commit-Line Theme Codes? [click here](https://github.com/Aizhee/Commit-Line/discussions/1). Feel free to view other community-made themes too!
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
