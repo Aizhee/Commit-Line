@@ -29,9 +29,10 @@ Commit-Line is a customizable timeline generator for public GitHub repositories.
 1. **Import Default Theme CSS**: 
 ```html 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/base-theme.css">
+<!--Modify this in Theme Editor-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aizhee/Commit-Line/css/variables.css">
 ```
-2. **Add two elements with uqique ID's**: In this case, an inner div with the ID ```timeline``` and an outer div ```commitLine```
+2. **Add two elements with unique ID's**: In this case, an inner div with the ID ```timeline``` and an outer div ```commitLine```
 ```html
 <div id="commitLine">
     <div id="timeline"></div>
