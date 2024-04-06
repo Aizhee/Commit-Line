@@ -93,6 +93,7 @@ document.getElementById('shareURL').addEventListener('click', () => checkIfGener
 document.getElementById('shareIFrame').addEventListener('click', () => checkIfGenerated(shareIFrame));
 document.getElementById('copyCode').addEventListener('click', () => checkIfGenerated(copyCode));
 document.getElementById('changeTheme').addEventListener('click', changeTheme);
+document.getElementById('openThemeForum').addEventListener('click', openThemeForum);
 
 function checkIfGenerated(functionName) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -111,9 +112,9 @@ function checkIfGenerated(functionName) {
 function copyCode() {
     const urlParams = new URLSearchParams(window.location.search);
     const repositoryURL = urlParams.get('url');
-    const theme = urlParams.get('theme');
+    const theme = document.getElementById('theme').value;
 
-    if (theme !== null, theme !== '', theme !== undefined) {
+    if (theme !== null && theme !== '' && theme !== undefined) {
         var decoded = atob(theme);
         var compressed = new Uint8Array(decoded.length);
         for (var i = 0; i < decoded.length; i++) {
@@ -258,6 +259,10 @@ function showHeading() {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('hvisible', 1);
     window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+}
+
+function openThemeForum() {
+    window.open('https://github.com/Aizhee/Commit-Line/discussions/1', '_blank');
 }
 
 function changeTheme() {

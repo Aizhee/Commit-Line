@@ -78,10 +78,17 @@
           </svg>
           Copy Theme Code
         </button>
-        <button id="openWiki" class="menu-btn" onclick="window.location.href='https://github.com/Aizhee/Commit-Line/wiki/Customizing-Commit‐Line#variable-css-table'" >
+        <button id="openWiki" class="menu-btn" onclick="window.open('https://github.com/Aizhee/Commit-Line/wiki/Customizing-Commit‐Line#variable-css-table', '_blank')" >
           <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="15"  viewBox="0 0 20 21"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-book-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z" /><path d="M19 16h-12a2 2 0 0 0 -2 2" /><path d="M9 8h6" /></svg>
          Open Wiki
         </button>
+        <button id="downloadCSS" class="menu-btn">
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="15"  height="20"  viewBox="0 0 20 20"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><path d="M12 17v-6" /><path d="M9.5 14.5l2.5 2.5l2.5 -2.5" /></svg>
+         Download CSS
+        </button>
+        <button  id="openThemeForum" class="menu-btn">
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+              Theme Discussions</button>   
       </span>
       
     </div>
@@ -121,12 +128,12 @@
             for="content-border-radius">content-border-radius:</label><input type="text" id="content-border-radius"
             class="css-variable" value="5px"><br><label for="content-border-width">content-border-width:</label><input
             type="text" id="content-border-width" class="css-variable" value="2px"><br><label
-            for="content-border-style">content-border-style:</label><input type="text" id="content-border-style"
+            for="content-border-style">content-<a href="https://www.w3schools.com/css/css_border.asp" target="_blank" rel="noopener noreferrer">border-style</a>:</label><input type="text" id="content-border-style"
             class="css-variable" value="none"><br><label for="content-max-width">content-max-width:</label><input type="text"
             id="content-max-width" class="css-variable" value="700px"><br><label
             for="content-padding">content-padding:</label><input type="text" id="content-padding" class="css-variable"
             value="15px"><br>
-        <h3>Font Properties (Google Fonts Supported)</h3><label for="font-family-global">font-family-global:</label><input
+        <h3>Font Properties (<a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer">Google Fonts Supported</a>)</h3><label for="font-family-global">font-family-global:</label><input
             type="text" id="font-family-global" class="css-variable" value="&quot;Outfit&quot;, sans-serif"><br>
         <h3>Time Margin</h3><label for="margin-top-time">margin-top-time:</label><input type="text" id="margin-top-time"
             class="css-variable" value="-20px"><br>
@@ -141,8 +148,8 @@
             id="font-weight-commit-message" class="css-variable" value="600"><br><label
             for="font-weight-commit-time">font-weight-commit-time:</label><input type="text" id="font-weight-commit-time"
             class="css-variable" value="400"><br>
-        <h3>Pointer Properties (line or arrow)</h3><label for="pointer-type">pointer-type:</label><input type="text" id="pointer-type"
-            class="css-variable" value="line"><br>
+        <h3>Pointer Properties (line or arrow)</h3><label for="pointer-type">pointer-type:</label><select type="text" id="pointer-type"
+            class="css-variable drop-down"><option value="line" selected>line</option><option value="arrow">arrow</option></select><br>
         <h3>Branch(Line) Properties</h3><label for="branch-color">branch-color:</label><input type="text" id="branch-color"
             class="css-variable input-color" value="128, 0, 255"><br><label for="branch-thickness">branch-thickness:</label><input
             type="text" id="branch-thickness" class="css-variable" value="3px"><br><label
@@ -175,7 +182,7 @@
         <h3>Hover Properties</h3>
         <h3>Global Transition Property</h3><label for="transition-property-seconds">transition-property-seconds:</label><input
             type="text" id="transition-property-seconds" class="css-variable" value="0.3s"><br><label
-            for="transition-property-bezier-curve">transition-property-bezier-curve:</label><input type="text"
+            for="transition-property-bezier-curve"><a href="https://www.w3schools.com/css/css3_transitions.asp" target="_blank" rel="noopener noreferrer">transition-property-bezier-curve</a>:</label><input type="text"
             id="transition-property-bezier-curve" class="css-variable" value="ease-in-out"><br><label
             for="hover-content-background-color">hover-content-background-color:</label><input type="text"
             id="hover-content-background-color" class="css-variable input-color" value="0, 0, 0"><br><label
@@ -184,12 +191,12 @@
             for="hover-content-border-color">hover-content-border-color:</label><input type="text"
             id="hover-content-border-color" class="css-variable input-color" value="128, 0, 255"><br>
         <h3>Gradient Background</h3><label
-            for="content-text-gradient-background">content-text-gradient-background:</label><input type="text"
+            for="content-text-gradient-background">content-text-gradient-background: <a href="https://cssgradient.io" target="_blank" rel="noopener noreferrer">Generate Here</a></label><input type="text"
             id="content-text-gradient-background" class="css-variable"
             value="linear-gradient(180deg, rgb(49, 86, 252) 0%, rgb(154, 53, 255) 52%, rgb(68, 249, 234) 100%)"><br><label
             for="content-text-fill-color">content-text-fill-color:</label><input type="text" id="content-text-fill-color"
             class="css-variable " value="transparent"><br>
-        <h3>Hover Content Properties</h3><label for="hover-content-border-style">hover-content-border-style:</label><input
+        <h3>Hover Content Properties</h3><label for="hover-content-border-style">hover-content-<a href="https://www.w3schools.com/css/css_border.asp" target="_blank" rel="noopener noreferrer">border-style</a>:</label><input
             type="text" id="hover-content-border-style" class="css-variable" value="dashed"><br><label
             for="hover-content-border-radius">hover-content-border-radius:</label><input type="text"
             id="hover-content-border-radius" class="css-variable" value="10px"><br><label
@@ -212,8 +219,25 @@
     </div>
 
     <h4 id="Error">Screen size too small. To display editor, please use a larger screen.</h4>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script>
+
+      document.getElementById('downloadCSS').addEventListener('click', downloadCSS);
+      function downloadCSS(){
+            var cssText = `:root {`;
+            var inputs = document.querySelectorAll('.css-variable');
+            inputs.forEach(function (input) {
+                var value = input.value;
+                var variableName = input.id.replace(/-/g, '-'); 
+                variableName = `-${variableName}`; 
+                cssText += `\n\t-${variableName}: ${value};`;
+            });
+            cssText += `\n}`;
+        var blob = new Blob([cssText], {type: "text/plain;charset=utf-8"});
+
+        saveAs(blob, "variables.css");
+      }
+
         function applyCSSVariables() {
             var iframe = document.getElementById('commitLineIframe');
             var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -237,6 +261,7 @@
             } else {
                 
                 style.textContent = cssText;
+
             }
             combineInputs()
         }
@@ -350,6 +375,15 @@
             return `${r},${g},${b}`;
         }
 
+        document.querySelectorAll('.drop-down').forEach(function(select) {
+          select.addEventListener('input', function() {
+            applyCSSVariables();
+          });
+        });
+        document.getElementById('openThemeForum').addEventListener('click', openThemeForum);
+        function openThemeForum() {
+            window.open('https://github.com/Aizhee/Commit-Line/discussions/1', '_blank');
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
     <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
