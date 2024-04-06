@@ -136,7 +136,24 @@ label{
     display: none;
 }
 
+.chover {
+    background-color: rgba(var(--hover-content-background-color),var(--hover-content-background-color-alpha));
+    box-shadow: var(--hover-box-shadow);
+    -webkit-box-shadow: var(--hover-box-shadow);
+    -moz-box-shadow: var(--hover-box-shadow);
+    outline: rgb(var(--hover-content-border-color)) var(--hover-content-border-width) var(--hover-content-border-style);
+    border-radius: var(--content-border-radius);
+    padding: var(--hover-content-padding);
+}
 
+.choverp {
+    position: relative;
+    background: var(--content-text-gradient-background);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: var(--content-text-fill-color);
+    transition: all var(--transition-property-seconds) var(--transition-property-bezier-curve);
+}
 
 @media screen and (max-width: 600px) {
     #commitLinee, #heading, #settings, .gutter {

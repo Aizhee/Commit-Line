@@ -88,7 +88,7 @@
         </button>
         <button  id="openThemeForum" class="menu-btn">
           <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
-              Theme Discussions</button>   
+              Share Theme</button>   
       </span>
       
     </div>
@@ -219,7 +219,11 @@
     </div>
 
     <h4 id="Error">Screen size too small. To display editor, please use a larger screen.</h4>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js" integrity="sha512-7tWCgq9tTYS/QkGVyKrtLpqAoMV9XIUxoou+sPUypsaZx56cYR/qio84fPK9EvJJtKvJEwt7vkn6je5UVzGevw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
     <script>
 
       document.getElementById('downloadCSS').addEventListener('click', downloadCSS);
@@ -277,7 +281,6 @@
             var encoded = btoa(String.fromCharCode.apply(null, compressed));
             document.getElementById('theme').value = encoded;
         }
-
 
         window.onload = applyCSSVariables;
         document.getElementById('copyCode').addEventListener('click', applyCSSVariables);
@@ -380,10 +383,51 @@
             applyCSSVariables();
           });
         });
+        
         document.getElementById('openThemeForum').addEventListener('click', openThemeForum);
         function openThemeForum() {
-            window.open('https://github.com/Aizhee/Commit-Line/discussions/1', '_blank');
+            var themeValue = document.getElementById('theme').value;
+            screenshot();
+            navigator.clipboard.writeText(
+              `**THEME TITLE:** your-title-here\n**CODE:** \`` + themeValue + `\`\n**PREVIEW:** your-image-here`
+            )
+                .then(function() {
+                    sucessToast("Copied!", 'You will now be redirected to the theme forum. Paste the copied text in the comments, add a title and a preview image that just downloaded and click "Submit" to share your theme!')
+                    var newWindow = window.open('https://github.com/Aizhee/Commit-Line/discussions/1', '_blank', 'width=800,height=600');
+                })
+                .catch(function(err) {
+                    errorToast("Error!", 'Could not copy text: ', err)
+                });
         }
+
+        function screenshot(){
+            var iframe = document.getElementById('commitLineIframe');
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var bodyIframe = iframeDoc.body;
+
+            var element = iframeDoc.querySelector('.content');
+
+            const event = new MouseEvent('mouseover', {
+              bubbles: true,
+              cancelable: false,
+              view: window
+            });
+            element.dispatchEvent(event);
+
+            htmlToImage.toPng(bodyIframe)
+            .then(function (dataUrl) {
+              let a = document.createElement("a");
+              a.download = "export.png";
+              a.href = dataUrl;
+              a.click();
+              sucessToast("Image Saved!", 'Your theme preview image has been saved.')
+            })
+            .catch(function (error) {
+              errorToast('Error saving image:', error);
+            });
+          
+        }
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
     <script src="https://unpkg.com/split.js/dist/split.min.js"></script>
