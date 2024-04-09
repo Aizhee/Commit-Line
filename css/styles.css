@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+#github-link{
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin: 1em;
+}
+
 #button-menu {
     display: flex;
     justify-content: center;
